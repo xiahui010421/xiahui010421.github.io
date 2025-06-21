@@ -1,0 +1,60 @@
+/* 重置默认边距，撑满视口 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* 让 body 变成 flex 容器，垂直排列 */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* 整个视口高度 */
+  width: 100vw;  /* 整个视口宽度 */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* header 固定高度 */
+header {
+  flex: 0 0 60px; /* 不伸缩，高度60px */
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+/* main 填充剩余空间 */
+
+.index-title {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  
+  background: linear-gradient(to right, #ffffff, #0f0901);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 兼容 Firefox（有些版本不支持） */
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* footer 固定高度 */
+footer {
+  flex: 0 0 40px; /* 不伸缩，高度40px */
+  background-color: transparent;
+  border-top: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #999;
+}
+
+
