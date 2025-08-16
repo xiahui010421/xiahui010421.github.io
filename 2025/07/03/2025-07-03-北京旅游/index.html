@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>北京旅游 - xiahuibb&#39;s blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/post.css">
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body class="post-page">
+
+  <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/down.css" />
+
+<!-- <header class="site-header"> -->
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img src="/images/淘宝店铺忧忧素材库 (981).gif" alt="Logo" class="header-logo" />
+  <span class="header-title">xiahuibb&#39;s blog</span>
+   </div>
+    <!-- 中间的箭头按钮 -->
+    <div class="header-center">
+      <button id="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-content" class="dropdown-btn" aria-label="Toggle dropdown">
+      <svg viewBox="0 0 64 64" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg" class="sun-icon">
+        <g class="sun-rays">
+          <line x1="32" y1="4" x2="32" y2="14" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="50" x2="32" y2="60" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="4" y1="32" x2="14" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="32" x2="60" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="12" x2="19" y2="19" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="45" x2="52" y2="52" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="52" x2="19" y2="45" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="19" x2="52" y2="12" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <circle cx="32" cy="32" r="12" fill="#FFD93B" stroke="#FFB800" stroke-width="3"/>
+      </svg>
+    </button>
+
+    </div>
+
+    <nav class="header-nav">
+      <ul class="header-menu">
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives">Archives</a></li>
+        
+          <li><a href="/editor">Editor</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- 下拉内容放在 header 外，避免被 header 固定高度限制 -->
+<div id="dropdown-content" class="dropdown-content" aria-hidden="true" >
+  <div class="dropdown-inner">
+      <div id="calendar"></div>
+  </div>
+</div>
+
+<!-- Blog 日期 JSON 数据 -->
+<script id="blogDates" type="application/json">
+  ["2025-06-25","2025-06-26","2025-07-02","2025-07-03","2025-08-15","2025-06-22","2025-07-01"]
+</script>
+  <script>
+    const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
+    console.log('博客文章日期:', blogDates);
+  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('dropdown-toggle');
+  const dropdownContent = document.getElementById('dropdown-content');
+  const sunRays = toggleBtn.querySelector('.sun-rays');
+
+  let isExpanded = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isExpanded) {
+      // 播放太阳收起动画
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      // 先将 max-height 设置为当前内容高度，确保过渡从正确高度开始
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      // 触发重绘，确保浏览器识别新的 max-height
+      dropdownContent.offsetHeight;
+
+      // 延迟设置 max-height 为0，触发过渡动画
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20); // 20ms 的延迟足够触发动画
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+
+    } else {
+      // 播放太阳展开动画
+      sunRays.style.animation = 'rays-expand 0.4s forwards ease-out';
+
+      dropdownContent.style.opacity = '1';
+      dropdownContent.style.pointerEvents = 'auto';
+
+      // 直接设置 max-height 为内容高度，触发展开动画
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      dropdownContent.setAttribute('aria-hidden', 'false');
+      isExpanded = true;
+    }
+  });
+
+  // 点击外部关闭下拉框
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !dropdownContent.contains(e.target) && isExpanded) {
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+      dropdownContent.offsetHeight;
+
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20);
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+    }
+  });
+
+  sunRays.addEventListener('animationend', (e) => {
+    if (e.animationName === 'rays-collapse') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(0)';
+      sunRays.style.opacity = '0';
+    } else if (e.animationName === 'rays-expand') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(1)';
+      sunRays.style.opacity = '1';
+    }
+  });
+});
+
+
+
+
+// ...existing code...
+
+let currentYear, currentMonth;
+
+function renderCalendar(year, month, highlightDates) {
+  currentYear = year;
+  currentMonth = month;
+  const calendarEl = document.getElementById('calendar');
+  calendarEl.innerHTML = ''; // 清空
+
+  // 日历头部
+  const headerDiv = document.createElement('div');
+  headerDiv.className = 'calendar-header';
+  headerDiv.style.display = 'flex';
+  headerDiv.style.justifyContent = 'center';
+  headerDiv.style.alignItems = 'center';
+  headerDiv.style.marginBottom = '8px';
+  headerDiv.innerHTML = `
+    <button class="calendar-btn" id="prev-year" title="上一年">&laquo;</button>
+    <button class="calendar-btn" id="prev-month" title="上一月">&lsaquo;</button>
+    <span class="calendar-title" style="margin: 0 12px; font-weight: bold;">
+      ${year}年${month + 1}月
+    </span>
+    <button class="calendar-btn" id="next-month" title="下一月">&rsaquo;</button>
+    <button class="calendar-btn" id="next-year" title="下一年">&raquo;</button>
+  `;
+  calendarEl.appendChild(headerDiv);
+
+  // ...原有表格生成代码...
+  const daysOfWeek = ['日', '一', '二', '三', '四', '五', '六'];
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const firstWeekDay = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+
+  const table = document.createElement('table');
+  table.className = 'calendar-table';
+
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  daysOfWeek.forEach(d => {
+    const th = document.createElement('th');
+    th.textContent = d;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  let row = document.createElement('tr');
+  for (let i = 0; i < firstWeekDay; i++) {
+    row.appendChild(document.createElement('td'));
+  }
+  for (let day = 1; day <= totalDays; day++) {
+    if (row.children.length % 7 === 0) {
+      tbody.appendChild(row);
+      row = document.createElement('tr');
+    }
+    const td = document.createElement('td');
+    td.textContent = day;
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    if (highlightDates.includes(dateStr)) {
+      td.classList.add('highlight');
+    }
+    row.appendChild(td);
+  }
+  while (row.children.length < 7) {
+    row.appendChild(document.createElement('td'));
+  }
+  tbody.appendChild(row);
+  table.appendChild(tbody);
+  calendarEl.appendChild(table);
+
+  // 事件绑定
+  document.getElementById('prev-year').onclick = () => renderCalendar(year - 1, month, highlightDates);
+  document.getElementById('next-year').onclick = () => renderCalendar(year + 1, month, highlightDates);
+  document.getElementById('prev-month').onclick = () => {
+    if (month === 0) {
+      renderCalendar(year - 1, 11, highlightDates);
+    } else {
+      renderCalendar(year, month - 1, highlightDates);
+    }
+  };
+  document.getElementById('next-month').onclick = () => {
+    if (month === 11) {
+      renderCalendar(year + 1, 0, highlightDates);
+    } else {
+      renderCalendar(year, month + 1, highlightDates);
+    }
+  };
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  renderCalendar(now.getFullYear(), now.getMonth(), blogDates);
+  document.querySelector('.dropdown-inner').addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+});
+
+</script>
+
+
+  <main class="container">
+    <aside class="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%97%E4%BA%AC%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92"><span class="toc-number">1.</span> <span class="toc-text">北京行程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%88%EF%B8%8F-%E4%BA%A4%E9%80%9A%E5%AE%89%E6%8E%92"><span class="toc-number">1.1.</span> <span class="toc-text">✈️ 交通安排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%85-%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92"><span class="toc-number">1.2.</span> <span class="toc-text">📅 行程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%889%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%BA%94%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">7月9日（星期五）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8810%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E5%85%AD%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">7月10日（星期六）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8811%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E6%97%A5%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">7月11日（星期日）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8812%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%B8%80%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">7月12日（星期一）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8813%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%BA%8C%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">7月13日（星期二）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8814%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%B8%89%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">7月14日（星期三）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8815%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E5%9B%9B%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">7月15日（星期四）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%B0-%E8%B4%B9%E7%94%A8%E6%B8%85%E5%8D%95"><span class="toc-number">1.3.</span> <span class="toc-text">💰 费用清单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E5%B7%B2%E7%A1%AE%E8%AE%A4%E6%94%AF%E5%87%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">✅ 已确认支出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9D%97-%E6%9C%AA%E7%A1%AE%E8%AE%A4%E6%94%AF%E5%87%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">❗ 未确认支出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8D%BD%EF%B8%8F-%E5%90%83%E9%A5%AD%E8%8A%B1%E8%B4%B9"><span class="toc-number">1.4.</span> <span class="toc-text">🍽️ 吃饭花费</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%96-%E5%87%BA%E8%A1%8C%E6%89%93%E8%BD%A6-%E5%85%AC%E4%BA%A4-%E5%9C%B0%E9%93%81"><span class="toc-number">1.5.</span> <span class="toc-text">🚖 出行打车 &#x2F; 公交 &#x2F; 地铁</span></a></li></ol></li></ol>
+    </aside>
+    <section class="content">
+      <h1 id="北京行程安排"><a href="#北京行程安排" class="headerlink" title="北京行程安排"></a>北京行程安排</h1><h2 id="✈️-交通安排"><a href="#✈️-交通安排" class="headerlink" title="✈️ 交通安排"></a>✈️ 交通安排</h2><ul>
+<li>7月9日（星期五）8:10 飞机，10:40 抵达北京大兴机场</li>
+<li>乘坐大兴草桥线（第一趟免费），然后打车至酒店</li>
+<li>回程：7月15日（星期四）18:00 飞机，15:00 从酒店出发前往大兴草桥站转机场</li>
+</ul>
+<hr>
+<h2 id="📅-行程安排"><a href="#📅-行程安排" class="headerlink" title="📅 行程安排"></a>📅 行程安排</h2><h3 id="7月9日（星期五）"><a href="#7月9日（星期五）" class="headerlink" title="7月9日（星期五）"></a><strong>7月9日（星期五）</strong></h3><ul>
+<li>抵达北京，入住酒店</li>
+<li>吃饭、休息、调整</li>
+</ul>
+<hr>
+<h3 id="7月10日（星期六）"><a href="#7月10日（星期六）" class="headerlink" title="7月10日（星期六）"></a><strong>7月10日（星期六）</strong></h3><ul>
+<li>10:15 到毛主席纪念馆</li>
+<li>10:30 参观天安门广场</li>
+<li>北海公园</li>
+<li>午餐</li>
+<li>下午：天坛</li>
+</ul>
+<hr>
+<h3 id="7月11日（星期日）"><a href="#7月11日（星期日）" class="headerlink" title="7月11日（星期日）"></a><strong>7月11日（星期日）</strong></h3><ul>
+<li>人民大会堂</li>
+<li>中国国家博物馆</li>
+</ul>
+<hr>
+<h3 id="7月12日（星期一）"><a href="#7月12日（星期一）" class="headerlink" title="7月12日（星期一）"></a><strong>7月12日（星期一）</strong></h3><ul>
+<li>长城一日游  <ul>
+<li>缆车：280 元  </li>
+<li>大巴：160 元  </li>
+<li>P4 停车场（13:00 - 17:00）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="7月13日（星期二）"><a href="#7月13日（星期二）" class="headerlink" title="7月13日（星期二）"></a><strong>7月13日（星期二）</strong></h3><ul>
+<li>上午：故宫（门票 60+30 元）</li>
+<li>景山公园</li>
+</ul>
+<hr>
+<h3 id="7月14日（星期三）"><a href="#7月14日（星期三）" class="headerlink" title="7月14日（星期三）"></a><strong>7月14日（星期三）</strong></h3><ul>
+<li>颐和园（门票 60 元）</li>
+<li>清华大学、北京大学</li>
+<li>圆明园</li>
+</ul>
+<hr>
+<h3 id="7月15日（星期四）"><a href="#7月15日（星期四）" class="headerlink" title="7月15日（星期四）"></a><strong>7月15日（星期四）</strong></h3><ul>
+<li>中国考古博物馆</li>
+<li>中国共产党历史馆</li>
+<li>鸟巢、水立方</li>
+<li>下午：外卖烤鸭和点心</li>
+<li>15:00 出发前往大兴机场</li>
+</ul>
+<hr>
+<h2 id="💰-费用清单"><a href="#💰-费用清单" class="headerlink" title="💰 费用清单"></a>💰 费用清单</h2><h3 id="✅-已确认支出"><a href="#✅-已确认支出" class="headerlink" title="✅ 已确认支出"></a>✅ 已确认支出</h3><ul>
+<li><p>飞机：2680 元</p>
+</li>
+<li><p>酒店：2298 元</p>
+</li>
+<li><p>总计：4978 元</p>
+</li>
+<li><p>星期六：1006 元</p>
+</li>
+<li><p>星期天：422 元</p>
+</li>
+<li><p>大兴草桥线首趟免费</p>
+</li>
+<li><p>剩余预算：3000 元</p>
+</li>
+<li><p>门票合计（442 元）：</p>
+<ul>
+<li>故宫：90 元  </li>
+<li>人民大会堂：30 元  </li>
+<li>天坛：34 元  </li>
+<li>北海：20 元  </li>
+<li>游船：180 元  </li>
+<li>毛主席纪念馆相片：68 元  </li>
+<li>照片：20 元</li>
+</ul>
+</li>
+<li><p>凤冠：124 元</p>
+</li>
+</ul>
+<h3 id="❗-未确认支出"><a href="#❗-未确认支出" class="headerlink" title="❗ 未确认支出"></a>❗ 未确认支出</h3><ul>
+<li>长城门票：60 元</li>
+<li>缆车：280 元</li>
+<li>大巴：160 元</li>
+<li>P4 停车场：待确认费用</li>
+</ul>
+<hr>
+<h2 id="🍽️-吃饭花费"><a href="#🍽️-吃饭花费" class="headerlink" title="🍽️ 吃饭花费"></a>🍽️ 吃饭花费</h2><ul>
+<li><p>绿豆粥：2 元  </p>
+</li>
+<li><p>机场：17 + 5 元  </p>
+</li>
+<li><p>南门涮肉：165 元  </p>
+</li>
+<li><p>便利店：36 元  </p>
+</li>
+<li><p>中饭：23 元  </p>
+</li>
+<li><p>水：5 元  </p>
+</li>
+<li><p>晚饭：75 元  </p>
+</li>
+<li><p>外卖：90 元<br><strong>合计：418 元</strong></p>
+</li>
+<li><p>国博中饭：56 元  </p>
+</li>
+<li><p>晚饭：200 元<br><strong>合计：256 元</strong></p>
+</li>
+<li><p>长城中饭：25 元</p>
+</li>
+</ul>
+<hr>
+<h2 id="🚖-出行打车-公交-地铁"><a href="#🚖-出行打车-公交-地铁" class="headerlink" title="🚖 出行打车 &#x2F; 公交 &#x2F; 地铁"></a>🚖 出行打车 &#x2F; 公交 &#x2F; 地铁</h2><ul>
+<li><p>家→机场：30 元  </p>
+</li>
+<li><p>草桥→酒店：38 元  </p>
+</li>
+<li><p>北海→天坛：30 元  </p>
+</li>
+<li><p>天坛→酒店：26 元  </p>
+</li>
+<li><p>南门涮肉→酒店：13 元  </p>
+</li>
+<li><p>地铁：6 元  </p>
+</li>
+<li><p>公交：2 元<br><strong>合计：145 元</strong></p>
+</li>
+<li><p>酒店→人民大会堂：15.6 元  </p>
+</li>
+<li><p>公交：2 元  </p>
+</li>
+<li><p>国博→酒店：23 元<br><strong>合计：42 元</strong></p>
+</li>
+</ul>
+
+    </section>
+  </main>
+
+  <hr>
+<footer>
+  <p>© 2025 xiahui010421 | Powered by XiaHui</p>
+</footer>
+
+</body>
+<script src="/js/post.js"></script>
+</html>
