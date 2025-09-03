@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>test1 - xiahuibb&#39;s blog</title>
+  <title>ccd-对应我的简历的相关问题 - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
   
     <link rel="stylesheet" href="/css/post.css">
@@ -64,7 +64,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-06-25","2025-06-26","2025-07-02","2025-07-03","2025-08-15","2025-06-22","2025-07-01"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-08-26"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -261,10 +261,89 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <main class="container">
     <aside class="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%80%E8%83%BD%E7%82%B9%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88%EF%BC%88%E5%9F%BA%E4%BA%8E-CCD-system%E9%A1%B9%E7%9B%AE%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">技能点优化方案（基于 CCD-system项目）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTML-CSS-JS-%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">1. HTML&#x2F;CSS&#x2F;JS 前端基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Vue-%E5%8F%8A%E7%94%9F%E6%80%81%EF%BC%88Vuex-Router-Element-UI-Vite%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">2. Vue 及生态（Vuex &#x2F; Router &#x2F; Element UI &#x2F; Vite）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BB%84%E4%BB%B6%E5%BA%93%E4%B8%8E-CSS-%E5%AE%9A%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">3. 组件库与 CSS 定制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Git-%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E4%B8%8E%E5%8D%8F%E4%BD%9C"><span class="toc-number">1.4.</span> <span class="toc-text">4. Git 仓库管理与协作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%90%8E%E7%AB%AF-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.5.</span> <span class="toc-text">5. 后端 &#x2F; 数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96"><span class="toc-number">1.6.</span> <span class="toc-text">6. 数据结构与算法优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5"><span class="toc-number">1.7.</span> <span class="toc-text">7. 计算机网络与接口对接</span></a></li></ol></li></ol>
     </aside>
     <section class="content">
-      <p>Test</p>
+      <h1 id="技能点优化方案（基于-CCD-system项目）"><a href="#技能点优化方案（基于-CCD-system项目）" class="headerlink" title="技能点优化方案（基于 CCD-system项目）"></a>技能点优化方案（基于 CCD-system项目）</h1><h2 id="1-HTML-CSS-JS-前端基础"><a href="#1-HTML-CSS-JS-前端基础" class="headerlink" title="1. HTML&#x2F;CSS&#x2F;JS 前端基础"></a>1. HTML&#x2F;CSS&#x2F;JS 前端基础</h2><ul>
+<li><strong>精准还原设计稿</strong></li>
+<li><strong>JS 数据处理与兼容</strong><ul>
+<li>解析后端返回的 JSON 字符串数据（如 <code>&quot;[&#123;\&quot;id\&quot;:1&#125;]&quot;</code> → <code>JSON.parse()</code>）；</li>
+<li>兼容不同工厂服务器（武汉 WUH、烟台 YAN），保证 API 渲染一致。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-Vue-及生态（Vuex-Router-Element-UI-Vite）"><a href="#2-Vue-及生态（Vuex-Router-Element-UI-Vite）" class="headerlink" title="2. Vue 及生态（Vuex &#x2F; Router &#x2F; Element UI &#x2F; Vite）"></a>2. Vue 及生态（Vuex &#x2F; Router &#x2F; Element UI &#x2F; Vite）</h2><ul>
+<li><strong>Vue 核心</strong><ul>
+<li>BUG1：用 <code>reactive/obs</code> 定义工厂列表 <code>plantList</code>，数据响应式渲染。</li>
+<li>BUG2：<code>computed</code> 生成默认日期范围（当前日期 -7 天 ~ 当前日期）。</li>
+</ul>
+</li>
+<li><strong>生态链落地</strong><ul>
+<li>Vue Router：配置 <code>/user-admin</code>、<code>/action-operation</code> 两个核心页面。</li>
+<li>Element UI：表格、下拉框、按钮全量覆盖业务。</li>
+<li>Vite：热更新加速调试，BUG 修复效率提升 30%。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-组件库与-CSS-定制"><a href="#3-组件库与-CSS-定制" class="headerlink" title="3. 组件库与 CSS 定制"></a>3. 组件库与 CSS 定制</h2><ul>
+<li><strong>Element UI 深度定制</strong><ul>
+<li>BUG3：<code>el-select</code> hover 样式统一 ，增加 placeholder 提示。</li>
+<li>表格定制：质检结果列（NG 红色、Low-Risk 黄色）提升可读性。</li>
+</ul>
+</li>
+<li><strong>CSS 方案</strong><ul>
+<li>Less：定义统一变量，复用到表格&#x2F;按钮。</li>
+<li>Tailwind：快速布局（flex、justify-between），适配车间大屏&#x2F;笔记本分辨率。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-Git-仓库管理与协作"><a href="#4-Git-仓库管理与协作" class="headerlink" title="4. Git 仓库管理与协作"></a>4. Git 仓库管理与协作</h2><ul>
+<li><strong>分支管理</strong><ul>
+<li>如 <code>feature/bug1-plant-select</code>、<code>feature/bug2-action-date</code>，避免直接动 <code>main</code>。</li>
+</ul>
+</li>
+<li><strong>提交规范</strong><ul>
+<li><code>fix: 修复工厂下拉框硬编码</code>、<code>feat: Action 页新增日期范围筛选</code>。</li>
+</ul>
+</li>
+<li><strong>多人协作</strong><ul>
+<li><code>git pull/merge</code> 同步 API 变更，解决冲突（如日期逻辑修改）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-后端-数据库"><a href="#5-后端-数据库" class="headerlink" title="5. 后端 &#x2F; 数据库"></a>5. 后端 &#x2F; 数据库</h2><ul>
+<li><strong>后端与数据库</strong><ul>
+<li>MySQL 验证前端写入：<code>sys_user</code> 表核对工厂字段，<code>buss_plant</code> 表确认工厂列表。</li>
+<li>postman 测试 API，发现 <code>Content-Type</code> 配置缺失问题。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-数据结构与算法优化"><a href="#6-数据结构与算法优化" class="headerlink" title="6. 数据结构与算法优化"></a>6. 数据结构与算法优化</h2><ul>
+<li><strong>数据结构应用</strong><ul>
+<li>数组：遍历工厂列表渲染下拉框，<code>find</code> 定位用户默认工厂。</li>
+<li>哈希表：日期范围映射 <code>&#123; &#39;7天&#39;: 7, &#39;30天&#39;: 30 &#125;</code>。</li>
+</ul>
+</li>
+<li><strong>算法优化</strong></li>
+</ul>
+<hr>
+<h2 id="7-计算机网络与接口对接"><a href="#7-计算机网络与接口对接" class="headerlink" title="7. 计算机网络与接口对接"></a>7. 计算机网络与接口对接</h2><ul>
+<li><strong>HTTP 协议实践</strong><ul>
+<li>POST 请求统一 <code>Content-Type: application/json</code>，解决 400 错误。</li>
+<li>Axios 响应拦截：200 正常 &#x2F; 401 跳转登录 &#x2F; 500 错误提示。</li>
+</ul>
+</li>
+<li><strong>TCP&#x2F;IP 与可靠传输</strong><ul>
+<li>设置 Axios 超时 <code>5000ms</code>，避免工厂服务器网络抖动。</li>
+<li>校验返回数据必填字段（id&#x2F;item&#x2F;describe），缺失时提示格式错误。</li>
+</ul>
+</li>
+</ul>
 
     </section>
   </main>

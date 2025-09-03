@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>夏慧简历 - xiahuibb&#39;s blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/post.css">
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body class="post-page">
+
+  <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/down.css" />
+
+<!-- <header class="site-header"> -->
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img src="/images/淘宝店铺忧忧素材库 (981).gif" alt="Logo" class="header-logo" />
+  <span class="header-title">xiahuibb&#39;s blog</span>
+   </div>
+    <!-- 中间的箭头按钮 -->
+    <div class="header-center">
+      <button id="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-content" class="dropdown-btn" aria-label="Toggle dropdown">
+      <svg viewBox="0 0 64 64" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg" class="sun-icon">
+        <g class="sun-rays">
+          <line x1="32" y1="4" x2="32" y2="14" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="50" x2="32" y2="60" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="4" y1="32" x2="14" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="32" x2="60" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="12" x2="19" y2="19" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="45" x2="52" y2="52" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="52" x2="19" y2="45" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="19" x2="52" y2="12" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <circle cx="32" cy="32" r="12" fill="#FFD93B" stroke="#FFB800" stroke-width="3"/>
+      </svg>
+    </button>
+
+    </div>
+
+    <nav class="header-nav">
+      <ul class="header-menu">
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives">Archives</a></li>
+        
+          <li><a href="/editor">Editor</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- 下拉内容放在 header 外，避免被 header 固定高度限制 -->
+<div id="dropdown-content" class="dropdown-content" aria-hidden="true" >
+  <div class="dropdown-inner">
+      <div id="calendar"></div>
+  </div>
+</div>
+
+<!-- Blog 日期 JSON 数据 -->
+<script id="blogDates" type="application/json">
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-08-26"]
+</script>
+  <script>
+    const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
+    console.log('博客文章日期:', blogDates);
+  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('dropdown-toggle');
+  const dropdownContent = document.getElementById('dropdown-content');
+  const sunRays = toggleBtn.querySelector('.sun-rays');
+
+  let isExpanded = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isExpanded) {
+      // 播放太阳收起动画
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      // 先将 max-height 设置为当前内容高度，确保过渡从正确高度开始
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      // 触发重绘，确保浏览器识别新的 max-height
+      dropdownContent.offsetHeight;
+
+      // 延迟设置 max-height 为0，触发过渡动画
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20); // 20ms 的延迟足够触发动画
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+
+    } else {
+      // 播放太阳展开动画
+      sunRays.style.animation = 'rays-expand 0.4s forwards ease-out';
+
+      dropdownContent.style.opacity = '1';
+      dropdownContent.style.pointerEvents = 'auto';
+
+      // 直接设置 max-height 为内容高度，触发展开动画
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      dropdownContent.setAttribute('aria-hidden', 'false');
+      isExpanded = true;
+    }
+  });
+
+  // 点击外部关闭下拉框
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !dropdownContent.contains(e.target) && isExpanded) {
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+      dropdownContent.offsetHeight;
+
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20);
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+    }
+  });
+
+  sunRays.addEventListener('animationend', (e) => {
+    if (e.animationName === 'rays-collapse') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(0)';
+      sunRays.style.opacity = '0';
+    } else if (e.animationName === 'rays-expand') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(1)';
+      sunRays.style.opacity = '1';
+    }
+  });
+});
+
+
+
+
+// ...existing code...
+
+let currentYear, currentMonth;
+
+function renderCalendar(year, month, highlightDates) {
+  currentYear = year;
+  currentMonth = month;
+  const calendarEl = document.getElementById('calendar');
+  calendarEl.innerHTML = ''; // 清空
+
+  // 日历头部
+  const headerDiv = document.createElement('div');
+  headerDiv.className = 'calendar-header';
+  headerDiv.style.display = 'flex';
+  headerDiv.style.justifyContent = 'center';
+  headerDiv.style.alignItems = 'center';
+  headerDiv.style.marginBottom = '8px';
+  headerDiv.innerHTML = `
+    <button class="calendar-btn" id="prev-year" title="上一年">&laquo;</button>
+    <button class="calendar-btn" id="prev-month" title="上一月">&lsaquo;</button>
+    <span class="calendar-title" style="margin: 0 12px; font-weight: bold;">
+      ${year}年${month + 1}月
+    </span>
+    <button class="calendar-btn" id="next-month" title="下一月">&rsaquo;</button>
+    <button class="calendar-btn" id="next-year" title="下一年">&raquo;</button>
+  `;
+  calendarEl.appendChild(headerDiv);
+
+  // ...原有表格生成代码...
+  const daysOfWeek = ['日', '一', '二', '三', '四', '五', '六'];
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const firstWeekDay = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+
+  const table = document.createElement('table');
+  table.className = 'calendar-table';
+
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  daysOfWeek.forEach(d => {
+    const th = document.createElement('th');
+    th.textContent = d;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  let row = document.createElement('tr');
+  for (let i = 0; i < firstWeekDay; i++) {
+    row.appendChild(document.createElement('td'));
+  }
+  for (let day = 1; day <= totalDays; day++) {
+    if (row.children.length % 7 === 0) {
+      tbody.appendChild(row);
+      row = document.createElement('tr');
+    }
+    const td = document.createElement('td');
+    td.textContent = day;
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    if (highlightDates.includes(dateStr)) {
+      td.classList.add('highlight');
+    }
+    row.appendChild(td);
+  }
+  while (row.children.length < 7) {
+    row.appendChild(document.createElement('td'));
+  }
+  tbody.appendChild(row);
+  table.appendChild(tbody);
+  calendarEl.appendChild(table);
+
+  // 事件绑定
+  document.getElementById('prev-year').onclick = () => renderCalendar(year - 1, month, highlightDates);
+  document.getElementById('next-year').onclick = () => renderCalendar(year + 1, month, highlightDates);
+  document.getElementById('prev-month').onclick = () => {
+    if (month === 0) {
+      renderCalendar(year - 1, 11, highlightDates);
+    } else {
+      renderCalendar(year, month - 1, highlightDates);
+    }
+  };
+  document.getElementById('next-month').onclick = () => {
+    if (month === 11) {
+      renderCalendar(year + 1, 0, highlightDates);
+    } else {
+      renderCalendar(year, month + 1, highlightDates);
+    }
+  };
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  renderCalendar(now.getFullYear(), now.getMonth(), blogDates);
+  document.querySelector('.dropdown-inner').addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+});
+
+</script>
+
+
+  <main class="container">
+    <aside class="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">夏慧_Web前端_应届生</span></a></li></ol>
+    </aside>
+    <section class="content">
+      
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>夏慧_Web前端_应届生_简历</title>
+    <style>
+    @page {
+      size: A4;
+      margin: 10mm; /* A4 打印边距缩小 */
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 10pt; /* 缩小字体让内容更紧凑 */
+        line-height: 1.4; /* 行距更紧凑 */
+      }
+      .page {
+        margin: 0;
+      }
+      .section-title {
+        page-break-after: avoid;
+      }
+      .proj-item, .exp-item, .edu-item {
+        page-break-inside: avoid; /* 避免拆开 */
+      }
+    }
+
+    :root {
+      --text: #333;
+      --primary1: #dc3545;
+      --primary2: #e85d75;
+      --accent: #007bff;
+      --shadow: rgba(220, 53, 69, 0.3);
+      --font-body: 'Microsoft YaHei', Arial, sans-serif;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      font-size: 12pt;
+    }
+    .page {
+      margin: 20px; /* 页面边距稍微缩小 */
+    }
+    .title {
+      text-align: center;
+      margin: 0 0 20px 0;
+      color: var(--text);
+      font-size: 24px; /* 缩小标题 */
+      font-weight: bold;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      min-height: 120px;
+      gap: 12px;
+    }
+    .profile {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .profile .info {
+      line-height: 1.6;
+      font-size: 10.5pt; /* 紧凑点 */
+    }
+    .info-row { margin-bottom: 4px; }
+    .info-row strong { font-weight: bold; }
+    .accent { color: var(--accent); text-decoration: none; }
+    .avatar-wrap { display: flex; justify-content: center; align-items: center; }
+    .avatar {
+      width: 100px; height: 120px; object-fit: cover; border-radius: 6px;
+    }
+    .section-title {
+      background: linear-gradient(135deg, var(--primary1), var(--primary2));
+      color: #fff;
+      padding: 8px 16px;
+      margin: 18px 0 10px 0;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+    .edu-item, .proj-item, .exp-item { margin-bottom: 10px; font-size: 10.5pt; }
+    .list { padding-left: 18px; margin: 6px 0; font-size: 10.5pt; }
+    .list li { margin: 4px 0; }
+    .split-line { height: 1px; background: #eee; margin: 8px 0; }
+    .list {
+      list-style-type: disc; /* 原点列表 */
+      padding-left: 20px;    /* 留出缩进，圆点不会贴着文字 */
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 class="title">夏慧_Web前端_应届生</h1>
+
+    <div class="topbar">
+      <div class="profile">
+        <div class="info">
+          <div class="info-row"><strong>手机号码：</strong> 18573184921</div>
+          <div class="info-row"><strong>邮箱：</strong> <a class="accent" href="mailto:xiahui010421@gmail.com">xiahui010421@gmail.com</a></div>
+          <div class="info-row"><strong>博客：</strong> <a class="accent" href="https://xiahui010421.github.io/" target="_blank" rel="noreferrer noopener">https://xiahui010421.github.io/</a></div>
+          <div class="info-row"><strong>基本信息：</strong> 24岁 女</div>
+        </div>
+      </div>
+      <div class="avatar-wrap">
+        <img class="avatar" src="/images/xiahui.jpg" alt="个人照片" />
+      </div>
+    </div>
+
+    <div class="section-title"><span>教育经历</span></div>
+    <div class="edu-item">
+      <div style="display: flex; justify-content: space-between;">
+        <div><strong>武汉工程大学</strong></div>
+        <div>2023年09月 - 2026年06月</div>
+      </div>
+      <div>计算机技术 硕士 | 计算机学院 | 武汉</div>
+      <div>GPA: 3.59（年级前5%）</div>
+    </div>
+
+    <div class="edu-item">
+      <div style="display: flex; justify-content: space-between;">
+        <div><strong>湖南农业大学</strong></div>
+        <div>2018年09月 - 2022年06月</div>
+      </div>
+      <div>信息与计算科学 本科 | 计算机学院 | 长沙</div>
+      <div>GPA: 3.28（年级前20%）</div>
+    </div>
+
+    <div class="edu-item">
+      <strong>相关课程：</strong> 高等代数、概率统计、C语言程序设计、面向对象开发（Java）、计算机网络、数据库、数据结构、计算机组成原理。
+    </div>
+
+    <div class="section-title"><span>专业技能</span></div>
+    <ul class="list">
+      <li>熟练使用 <strong>HTML/CSS/JS</strong> 以及各种前端库，能精确还原设计稿，兼容不同平台和浏览器</li>
+      <li>熟练使用 <strong>Vue</strong>，熟悉其相关生态（<strong>Vuex</strong>、<strong>Element UI</strong>、<strong>Vite</strong>、<strong>Vue Router</strong> 等），能独立完成各种需求</li>
+      <li>熟练使用 <strong>Element UI</strong>、<strong>Antd</strong> 等组件库，且熟练使用 <strong>Less/Sass</strong> 预编译器和 <strong>CSS-in-JS</strong>、<strong>Tailwind CSS</strong> 等 CSS 库，能深度定制化业务组件</li>
+      <li>熟练使用 <strong>Git</strong> 仓库管理，熟练多人协作 coding</li>
+      <li>熟悉 <strong>Java</strong>、<strong>Python</strong> 等编程语言，熟悉常用数据库，如 <strong>MySQL</strong>、<strong>Oracle</strong>；熟悉 <strong>Flutter</strong> 框架、<strong>Dart</strong> 语言</li>
+      <li>掌握常用的数据结构（链表、栈、队列等），熟练使用快速、归并排序、动态规划等算法</li>
+      <li>熟悉计算机网络原理，熟悉 <strong>TCP/IP</strong> 网络模型、<strong>HTTP</strong>、<strong>TCP</strong>、<strong>UDP</strong> 等</li>
+    </ul>
+
+    <div class="section-title"><span>项目经历</span></div>
+
+    <div class="proj-item">
+      <div style="display: flex; justify-content: space-between;">
+      <div>
+        <strong>海外广告盈利站点:
+          <a href="https://xiahui010421.github.io/happymac" target="_blank" rel="noopener noreferrer">
+            happymac.club
+          </a>
+        </strong>
+      </div>
+      <div>2024年06月 - 2025年05月</div>
+      </div>
+      <div class="split-line"></div>
+      <div class="meta"><strong>项目简介：</strong> 汇总各种 Windows 小游戏在 Mac 上的游玩教程（无畏契约、金铲铲之战等）、Mac 实用小工具（电池管理、剪切板、风扇散热控制等）—热门小游戏（水果忍者等）吸引国内外用户流量，接入海外广告盈利</div>
+      <ul class="list">
+        <li>
+          iframe 定制化嵌入(
+            <a class="accent" href="https://xiahui010421.github.io/happymac/smallgames/sgrz.html" target="_blank" rel="noreferrer noopener">
+              水果忍者体感版
+            </a>
+          )核心部分嵌入网站
+        </li>
+        <li>移动端适配，包括导航栏适配、多列布局适配、卡片布局适配等；多个独立 HTML 组成网站且保持一致</li>
+        <li>接入海外广告 + 谷歌埋点（分析 PV、UV）</li>
+      </ul>
+      <div class="meta">网站上线已半个月，目前日均新增用户约 50 人，独立访客（UV）超过 100，页面浏览量（PV）超过 500。数据来自 Google Analytics。</div>
+    </div>
+
+    <div class="proj-item">
+      <div style="display: flex; justify-content: space-between;">
+        <div><strong>智能家居 APP（机器人大赛参赛项目）</strong></div>
+        <div>2023年11月 - 2024年05月</div>
+      </div>
+      <div class="split-line"></div>
+      <div class="meta"><strong>简介：</strong> 为解决家庭设备控制分散、操作复杂的问题，团队开发了一款智能家居控制 APP，支持灯光、空调、安防等设备的远程控制和语音识别功能。项目获得国家级机器人大赛二等奖。</div>
+      <ol class="list">
+        <li>Vue + Element UI 还原设计稿，实现美观界面和良好体验的交互</li>
+        <li>Axios 二次封装：请求拦截、响应拦截报错统一处理</li>
+        <li>Pinia 做全局状态管理，实现多个组件间的状态共享和统一管理</li>
+        <li>对接后端接口 + 调试，并且集成模拟数据 Mock 进行开发</li>
+      </ol>
+    </div>
+
+    <div class="section-title"><span>实习经历</span></div>
+
+    <div class="exp-item">
+    <div style="display: flex; justify-content: space-between;">
+      <div><strong>彼欧亚洲技术实验中心</strong></div>
+      <div>2025年06月 - 2025年08月</div>
+    </div>
+      前端工程师 | 数据分析部分 | 武汉
+      <div class="split-line"></div>
+      <div class="meta"><strong>业务介绍：</strong> 聚焦汽车零部件产品全生命周期管理，核心项目 CCD Qualify 系统 负责对接工厂生产环节 —— 通过产品拍照检验、数据自动录入数据库，实现质检流程数字化管理，支撑全国多工厂（如武汉 WUH、烟台 YAN）的质检数据同步与用户权限管控。</div>
+      <div class="meta"><strong>技术栈：</strong> Vue.js、Axios、Vue Router、Element UI、JavaScript（ES6+）、前后端联调、MySQL（数据交互）</div>
+      <ul class="list">
+        <li><strong>核心职能：</strong> 主导前端 Bug 定位与修复，优化前端页面渲染逻辑</li>
+        <li>负责前端与后端的 API 对接（含接口调试、参数传递、数据格式处理），协同后端实现数据库数据的精准读取与提交</li>
+        <li>聚焦核心功能页（如用户管理、Action Operation 操作页）的交互优化，解决数据加载性能、动态配置化等关键问题，确保页面从 “不可用” 到 “稳定运行”</li>
+      </ul>
+      <div class="meta"><strong>关键成果：</strong> 核心 Bug 修复与功能落地</div>
+      <div class="meta"><strong>技术收获与价值：</strong> 熟练掌握 Vue 技术栈在企业级项目中的应用，
+        包括响应式数据管理、API 封装与联调、组件动态渲染，独立解决前端与后端、数据库的交互问题；
+        让关键业务页面恢复使用，直接支撑工厂质检流程，提升系统可用性；
+        理解前端性能优化的核心思路（如减少数据加载量、避免前端二次过滤），为后续项目的性能优化积累实践经验。</div>
+    </div>
+
+    <div class="section-title"><span>荣誉奖项</span></div>
+
+    <ul style="list-style-type: disc; padding-left: 20px;">
+      <li>
+        <div style="display: flex; justify-content: space-between;">
+          <span>智能机器人大赛国二</span>
+          <span>2024.06</span>
+        </div>
+      </li>
+      <li>
+        <div style="display: flex; justify-content: space-between;">
+          <span>蓝桥杯算法竞赛（Python）省一</span>
+          <span>2025.04</span>
+        </div>
+      </li>
+      <li>
+        <div style="display: flex; justify-content: space-between;">
+          <span>连续三年获得研究生学业一等奖奖学金</span>
+          <span>2024.10</span>
+        </div>
+      </li>
+      <li>
+        <div style="display: flex; justify-content: space-between;">
+          <span>发表 SCI 论文一篇，软著一篇</span>
+          <span>2025.03</span>
+        </div>
+      </li>
+      <li>
+        <div style="display: flex; justify-content: space-between;">
+          <span>CET-6，数据库三级，网络工程师</span>
+          <span>2021.04</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
+
+
+
+    </section>
+  </main>
+
+  <hr>
+<footer>
+  <p>© 2025 xiahui010421 | Powered by XiaHui</p>
+</footer>
+
+</body>
+<script src="/js/post.js"></script>
+</html>

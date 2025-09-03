@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Extension-xml-uuid - xiahuibb&#39;s blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/post.css">
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body class="post-page">
+
+  <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/down.css" />
+
+<!-- <header class="site-header"> -->
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img src="/images/淘宝店铺忧忧素材库 (981).gif" alt="Logo" class="header-logo" />
+  <span class="header-title">xiahuibb&#39;s blog</span>
+   </div>
+    <!-- 中间的箭头按钮 -->
+    <div class="header-center">
+      <button id="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-content" class="dropdown-btn" aria-label="Toggle dropdown">
+      <svg viewBox="0 0 64 64" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg" class="sun-icon">
+        <g class="sun-rays">
+          <line x1="32" y1="4" x2="32" y2="14" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="50" x2="32" y2="60" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="4" y1="32" x2="14" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="32" x2="60" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="12" x2="19" y2="19" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="45" x2="52" y2="52" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="52" x2="19" y2="45" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="19" x2="52" y2="12" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <circle cx="32" cy="32" r="12" fill="#FFD93B" stroke="#FFB800" stroke-width="3"/>
+      </svg>
+    </button>
+
+    </div>
+
+    <nav class="header-nav">
+      <ul class="header-menu">
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives">Archives</a></li>
+        
+          <li><a href="/editor">Editor</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- 下拉内容放在 header 外，避免被 header 固定高度限制 -->
+<div id="dropdown-content" class="dropdown-content" aria-hidden="true" >
+  <div class="dropdown-inner">
+      <div id="calendar"></div>
+  </div>
+</div>
+
+<!-- Blog 日期 JSON 数据 -->
+<script id="blogDates" type="application/json">
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-08-26"]
+</script>
+  <script>
+    const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
+    console.log('博客文章日期:', blogDates);
+  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('dropdown-toggle');
+  const dropdownContent = document.getElementById('dropdown-content');
+  const sunRays = toggleBtn.querySelector('.sun-rays');
+
+  let isExpanded = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isExpanded) {
+      // 播放太阳收起动画
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      // 先将 max-height 设置为当前内容高度，确保过渡从正确高度开始
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      // 触发重绘，确保浏览器识别新的 max-height
+      dropdownContent.offsetHeight;
+
+      // 延迟设置 max-height 为0，触发过渡动画
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20); // 20ms 的延迟足够触发动画
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+
+    } else {
+      // 播放太阳展开动画
+      sunRays.style.animation = 'rays-expand 0.4s forwards ease-out';
+
+      dropdownContent.style.opacity = '1';
+      dropdownContent.style.pointerEvents = 'auto';
+
+      // 直接设置 max-height 为内容高度，触发展开动画
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      dropdownContent.setAttribute('aria-hidden', 'false');
+      isExpanded = true;
+    }
+  });
+
+  // 点击外部关闭下拉框
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !dropdownContent.contains(e.target) && isExpanded) {
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+      dropdownContent.offsetHeight;
+
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20);
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+    }
+  });
+
+  sunRays.addEventListener('animationend', (e) => {
+    if (e.animationName === 'rays-collapse') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(0)';
+      sunRays.style.opacity = '0';
+    } else if (e.animationName === 'rays-expand') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(1)';
+      sunRays.style.opacity = '1';
+    }
+  });
+});
+
+
+
+
+// ...existing code...
+
+let currentYear, currentMonth;
+
+function renderCalendar(year, month, highlightDates) {
+  currentYear = year;
+  currentMonth = month;
+  const calendarEl = document.getElementById('calendar');
+  calendarEl.innerHTML = ''; // 清空
+
+  // 日历头部
+  const headerDiv = document.createElement('div');
+  headerDiv.className = 'calendar-header';
+  headerDiv.style.display = 'flex';
+  headerDiv.style.justifyContent = 'center';
+  headerDiv.style.alignItems = 'center';
+  headerDiv.style.marginBottom = '8px';
+  headerDiv.innerHTML = `
+    <button class="calendar-btn" id="prev-year" title="上一年">&laquo;</button>
+    <button class="calendar-btn" id="prev-month" title="上一月">&lsaquo;</button>
+    <span class="calendar-title" style="margin: 0 12px; font-weight: bold;">
+      ${year}年${month + 1}月
+    </span>
+    <button class="calendar-btn" id="next-month" title="下一月">&rsaquo;</button>
+    <button class="calendar-btn" id="next-year" title="下一年">&raquo;</button>
+  `;
+  calendarEl.appendChild(headerDiv);
+
+  // ...原有表格生成代码...
+  const daysOfWeek = ['日', '一', '二', '三', '四', '五', '六'];
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const firstWeekDay = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+
+  const table = document.createElement('table');
+  table.className = 'calendar-table';
+
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  daysOfWeek.forEach(d => {
+    const th = document.createElement('th');
+    th.textContent = d;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  let row = document.createElement('tr');
+  for (let i = 0; i < firstWeekDay; i++) {
+    row.appendChild(document.createElement('td'));
+  }
+  for (let day = 1; day <= totalDays; day++) {
+    if (row.children.length % 7 === 0) {
+      tbody.appendChild(row);
+      row = document.createElement('tr');
+    }
+    const td = document.createElement('td');
+    td.textContent = day;
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    if (highlightDates.includes(dateStr)) {
+      td.classList.add('highlight');
+    }
+    row.appendChild(td);
+  }
+  while (row.children.length < 7) {
+    row.appendChild(document.createElement('td'));
+  }
+  tbody.appendChild(row);
+  table.appendChild(tbody);
+  calendarEl.appendChild(table);
+
+  // 事件绑定
+  document.getElementById('prev-year').onclick = () => renderCalendar(year - 1, month, highlightDates);
+  document.getElementById('next-year').onclick = () => renderCalendar(year + 1, month, highlightDates);
+  document.getElementById('prev-month').onclick = () => {
+    if (month === 0) {
+      renderCalendar(year - 1, 11, highlightDates);
+    } else {
+      renderCalendar(year, month - 1, highlightDates);
+    }
+  };
+  document.getElementById('next-month').onclick = () => {
+    if (month === 11) {
+      renderCalendar(year + 1, 0, highlightDates);
+    } else {
+      renderCalendar(year, month + 1, highlightDates);
+    }
+  };
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  renderCalendar(now.getFullYear(), now.getMonth(), blogDates);
+  document.querySelector('.dropdown-inner').addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+});
+
+</script>
+
+
+  <main class="container">
+    <aside class="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XML-UUID-Hover-%E6%8F%92%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97%EF%BC%88%E6%B8%85%E6%99%B0%E7%89%88%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">XML UUID Hover 插件操作指南（清晰版）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">1️⃣ 准备环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E5%AE%89%E8%A3%85-VS-Code-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">2️⃣ 安装 VS Code 插件开发工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E5%88%9B%E5%BB%BA%E6%8F%92%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3️⃣ 创建插件工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%B8%8F%E2%83%A3-%E5%AE%89%E8%A3%85-CSV-%E8%A7%A3%E6%9E%90%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">4️⃣ 安装 CSV 解析库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%B8%8F%E2%83%A3-%E5%88%9B%E5%BB%BA-CSV-%E6%96%87%E4%BB%B6"><span class="toc-number">1.5.</span> <span class="toc-text">5️⃣ 创建 CSV 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%EF%B8%8F%E2%83%A3-%E4%BF%AE%E6%94%B9-package-json"><span class="toc-number">1.6.</span> <span class="toc-text">6️⃣ 修改 package.json</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-activationEvents"><span class="toc-number">1.6.1.</span> <span class="toc-text">1. activationEvents</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-contributes"><span class="toc-number">1.6.2.</span> <span class="toc-text">2. contributes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%EF%B8%8F%E2%83%A3-%E6%9B%BF%E6%8D%A2-src-extension-ts"><span class="toc-number">1.7.</span> <span class="toc-text">7️⃣ 替换 src&#x2F;extension.ts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%EF%B8%8F%E2%83%A3-%E8%BF%90%E8%A1%8C%E6%8F%92%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">8️⃣ 运行插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%EF%B8%8F%E2%83%A3-%E6%89%93%E5%8C%85%E6%8F%92%E4%BB%B6"><span class="toc-number">1.9.</span> <span class="toc-text">9️⃣ 打包插件</span></a></li></ol></li></ol>
+    </aside>
+    <section class="content">
+      <h1 id="XML-UUID-Hover-插件操作指南（清晰版）"><a href="#XML-UUID-Hover-插件操作指南（清晰版）" class="headerlink" title="XML UUID Hover 插件操作指南（清晰版）"></a>XML UUID Hover 插件操作指南（清晰版）</h1><h2 id="1️⃣-准备环境"><a href="#1️⃣-准备环境" class="headerlink" title="1️⃣ 准备环境"></a>1️⃣ 准备环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 Node.js 和 npm 版本</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>确保 Node.js &gt;&#x3D;18、npm 可用。</p>
+<hr>
+<h2 id="2️⃣-安装-VS-Code-插件开发工具"><a href="#2️⃣-安装-VS-Code-插件开发工具" class="headerlink" title="2️⃣ 安装 VS Code 插件开发工具"></a>2️⃣ 安装 VS Code 插件开发工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g yo generator-code</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果报权限错误，请加 <code>sudo</code>：<code>sudo npm i -g yo generator-code</code></p>
+</blockquote>
+<hr>
+<h2 id="3️⃣-创建插件工程"><a href="#3️⃣-创建插件工程" class="headerlink" title="3️⃣ 创建插件工程"></a>3️⃣ 创建插件工程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yo code</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选择 <strong>New Extension (TypeScript)</strong></li>
+<li>Extension name：<code>xml-uuid-hover</code></li>
+<li>其他选项一路回车（默认即可）</li>
+</ul>
+<p>进入工程目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> xml-uuid-hover</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4️⃣-安装-CSV-解析库"><a href="#4️⃣-安装-CSV-解析库" class="headerlink" title="4️⃣ 安装 CSV 解析库"></a>4️⃣ 安装 CSV 解析库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i csv-parse</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5️⃣-创建-CSV-文件"><a href="#5️⃣-创建-CSV-文件" class="headerlink" title="5️⃣ 创建 CSV 文件"></a>5️⃣ 创建 CSV 文件</h2><p>在工程根目录新建 <code>translations.csv</code>，示例内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UUID,English,Chinese</span><br><span class="line">00000001,open,打开</span><br><span class="line">00000002,close,关闭</span><br><span class="line">00000003,start,开始</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6️⃣-修改-package-json"><a href="#6️⃣-修改-package-json" class="headerlink" title="6️⃣ 修改 package.json"></a>6️⃣ 修改 <code>package.json</code></h2><h3 id="1-activationEvents"><a href="#1-activationEvents" class="headerlink" title="1. activationEvents"></a>1. activationEvents</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;activationEvents&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="string">&quot;onLanguage:xml&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;onCommand:xml-uuid-hover.reloadTranslations&quot;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-contributes"><a href="#2-contributes" class="headerlink" title="2. contributes"></a>2. contributes</h3><figure class="highlight jsonc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;contributes&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;configuration&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;XML UUID Hover&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;properties&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;xmlUuidHover.csvPath&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="string">&quot;translations.csv&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CSV 文件路径（绝对路径或相对工作区根目录）&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;commands&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xml-uuid-hover.reloadTranslations&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;XML UUID Hover: 重新加载翻译 CSV&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7️⃣-替换-src-extension-ts"><a href="#7️⃣-替换-src-extension-ts" class="headerlink" title="7️⃣ 替换 src/extension.ts"></a>7️⃣ 替换 <code>src/extension.ts</code></h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> vscode <span class="keyword">from</span> <span class="string">&quot;vscode&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> fs <span class="keyword">from</span> <span class="string">&quot;fs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> path <span class="keyword">from</span> <span class="string">&quot;path&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; parse &#125; <span class="keyword">from</span> <span class="string">&quot;csv-parse/sync&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> translationMap = <span class="keyword">new</span> <span class="title class_">Map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">resolveCsvPath</span>(<span class="params"><span class="attr">userPath</span>: <span class="built_in">string</span></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!userPath?.<span class="title function_">trim</span>()) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (path.<span class="title function_">isAbsolute</span>(userPath)) <span class="keyword">return</span> userPath;</span><br><span class="line">    <span class="keyword">const</span> root = vscode.<span class="property">workspace</span>.<span class="property">workspaceFolders</span>?.[<span class="number">0</span>]?.<span class="property">uri</span>.<span class="property">fsPath</span> || <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> path.<span class="title function_">join</span>(root, userPath);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadTranslation</span>(<span class="params"><span class="attr">filePathSetting</span>: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> finalPath = <span class="title function_">resolveCsvPath</span>(filePathSetting);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!finalPath) &#123;</span><br><span class="line">            vscode.<span class="property">window</span>.<span class="title function_">showWarningMessage</span>(<span class="string">&quot;未配置 CSV 路径（xmlUuidHover.csvPath）。&quot;</span>);</span><br><span class="line">            translationMap.<span class="title function_">clear</span>();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!fs.<span class="title function_">existsSync</span>(finalPath)) &#123;</span><br><span class="line">            vscode.<span class="property">window</span>.<span class="title function_">showWarningMessage</span>(<span class="string">`CSV 文件不存在：<span class="subst">$&#123;finalPath&#125;</span>`</span>);</span><br><span class="line">            translationMap.<span class="title function_">clear</span>();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> content = fs.<span class="title function_">readFileSync</span>(finalPath, <span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> <span class="attr">records</span>: <span class="built_in">any</span>[] = <span class="title function_">parse</span>(content, &#123; <span class="attr">columns</span>: <span class="literal">true</span>, <span class="attr">skip_empty_lines</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">        translationMap.<span class="title function_">clear</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> row <span class="keyword">of</span> records) &#123;</span><br><span class="line">            <span class="keyword">const</span> key = <span class="title class_">String</span>(row.<span class="property">UUID</span> || <span class="string">&quot;&quot;</span>).<span class="title function_">trim</span>();</span><br><span class="line">            <span class="keyword">const</span> zh = <span class="title class_">String</span>(row.<span class="property">Chinese</span> || <span class="string">&quot;&quot;</span>).<span class="title function_">trim</span>();</span><br><span class="line">            <span class="keyword">const</span> en = <span class="title class_">String</span>(row.<span class="property">English</span> || <span class="string">&quot;&quot;</span>).<span class="title function_">trim</span>();</span><br><span class="line">            <span class="keyword">if</span> (key) translationMap.<span class="title function_">set</span>(key, zh || en || <span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`[xml-uuid-hover] Translation loaded: <span class="subst">$&#123;translationMap.size&#125;</span>`</span>);</span><br><span class="line">        vscode.<span class="property">window</span>.<span class="title function_">setStatusBarMessage</span>(<span class="string">`XML UUID Hover: 已加载 <span class="subst">$&#123;translationMap.size&#125;</span> 条翻译`</span>, <span class="number">2000</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;[xml-uuid-hover] Failed to load CSV:&quot;</span>, e);</span><br><span class="line">        vscode.<span class="property">window</span>.<span class="title function_">showErrorMessage</span>(<span class="string">`加载 CSV 失败：<span class="subst">$&#123;<span class="built_in">String</span>((e <span class="keyword">as</span> <span class="built_in">Error</span>).message || e)&#125;</span>`</span>);</span><br><span class="line">        translationMap.<span class="title function_">clear</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">activate</span>(<span class="params"><span class="attr">context</span>: vscode.<span class="title class_">ExtensionContext</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">getCsvSetting</span> = (<span class="params"></span>) =&gt;</span><br><span class="line">        vscode.<span class="property">workspace</span>.<span class="title function_">getConfiguration</span>(<span class="string">&quot;xmlUuidHover&quot;</span>).<span class="property">get</span>&lt;<span class="built_in">string</span>&gt;(<span class="string">&quot;csvPath&quot;</span>) || <span class="string">&quot;translations.csv&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初次加载</span></span><br><span class="line">    <span class="keyword">let</span> csvPathSetting = <span class="title function_">getCsvSetting</span>();</span><br><span class="line">    <span class="title function_">loadTranslation</span>(csvPathSetting);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Hover Provider</span></span><br><span class="line">    <span class="keyword">const</span> hoverProvider = vscode.<span class="property">languages</span>.<span class="title function_">registerHoverProvider</span>(<span class="string">&quot;xml&quot;</span>, &#123;</span><br><span class="line">        <span class="title function_">provideHover</span>(<span class="params"><span class="variable language_">document</span>, position</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> range = <span class="variable language_">document</span>.<span class="title function_">getWordRangeAtPosition</span>(position, <span class="regexp">/[0-9A-Fa-f]&#123;8,&#125;/</span>);</span><br><span class="line">            <span class="keyword">if</span> (!range) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">const</span> word = <span class="variable language_">document</span>.<span class="title function_">getText</span>(range);</span><br><span class="line">            <span class="keyword">if</span> (translationMap.<span class="title function_">has</span>(word)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> vscode.<span class="title class_">Hover</span>(<span class="string">`翻译: <span class="subst">$&#123;translationMap.get(word)&#125;</span>`</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    context.<span class="property">subscriptions</span>.<span class="title function_">push</span>(hoverProvider);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 手动刷新命令</span></span><br><span class="line">    <span class="keyword">const</span> reloadCmd = vscode.<span class="property">commands</span>.<span class="title function_">registerCommand</span>(<span class="string">&quot;xml-uuid-hover.reloadTranslations&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        csvPathSetting = <span class="title function_">getCsvSetting</span>();</span><br><span class="line">        <span class="title function_">loadTranslation</span>(csvPathSetting);</span><br><span class="line">        vscode.<span class="property">window</span>.<span class="title function_">showInformationMessage</span>(<span class="string">&quot;翻译 CSV 已重新加载！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    context.<span class="property">subscriptions</span>.<span class="title function_">push</span>(reloadCmd);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置变更时自动重载</span></span><br><span class="line">    <span class="keyword">const</span> cfgWatcher = vscode.<span class="property">workspace</span>.<span class="title function_">onDidChangeConfiguration</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.<span class="title function_">affectsConfiguration</span>(<span class="string">&quot;xmlUuidHover.csvPath&quot;</span>)) &#123;</span><br><span class="line">            csvPathSetting = <span class="title function_">getCsvSetting</span>();</span><br><span class="line">            <span class="title function_">loadTranslation</span>(csvPathSetting);</span><br><span class="line">            vscode.<span class="property">window</span>.<span class="title function_">showInformationMessage</span>(<span class="string">&quot;翻译 CSV 路径已更新并重新加载。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    context.<span class="property">subscriptions</span>.<span class="title function_">push</span>(cfgWatcher);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">deactivate</span>(<span class="params"></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="8️⃣-运行插件"><a href="#8️⃣-运行插件" class="headerlink" title="8️⃣ 运行插件"></a>8️⃣ 运行插件</h2><ol>
+<li>打开 VS Code → 打开插件工程</li>
+<li>按 F5 启动 <strong>Extension Development Host</strong></li>
+<li>在新窗口里打开 <code>.xml</code> 文件，写入：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">text</span>=<span class="string">&quot;00000001&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>鼠标悬停在 <code>00000001</code> 上，会显示翻译：<code>翻译: 打开</code></li>
+</ol>
+<hr>
+<h2 id="9️⃣-打包插件"><a href="#9️⃣-打包插件" class="headerlink" title="9️⃣ 打包插件"></a>9️⃣ 打包插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地安装 vsce（推荐）</span></span><br><span class="line">npm install --save-dev vsce</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包</span></span><br><span class="line">npx vsce package</span><br></pre></td></tr></table></figure>
+
+<p>生成 <code>.vsix</code> 文件，可以在 VS Code 扩展面板 → … → Install from VSIX 安装。</p>
+
+    </section>
+  </main>
+
+  <hr>
+<footer>
+  <p>© 2025 xiahui010421 | Powered by XiaHui</p>
+</footer>
+
+</body>
+<script src="/js/post.js"></script>
+</html>
