@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>博客编辑器图片上传功能设置说明 - xiahuibb&#39;s blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/post.css">
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body class="post-page">
+
+  <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/down.css" />
+
+<!-- <header class="site-header"> -->
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img src="/images/淘宝店铺忧忧素材库 (981).gif" alt="Logo" class="header-logo" />
+  <span class="header-title">xiahuibb&#39;s blog</span>
+   </div>
+    <!-- 中间的箭头按钮 -->
+    <div class="header-center">
+      <button id="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-content" class="dropdown-btn" aria-label="Toggle dropdown">
+      <svg viewBox="0 0 64 64" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg" class="sun-icon">
+        <g class="sun-rays">
+          <line x1="32" y1="4" x2="32" y2="14" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="50" x2="32" y2="60" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="4" y1="32" x2="14" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="32" x2="60" y2="32" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="12" x2="19" y2="19" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="45" x2="52" y2="52" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="52" x2="19" y2="45" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+          <line x1="45" y1="19" x2="52" y2="12" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <circle cx="32" cy="32" r="12" fill="#FFD93B" stroke="#FFB800" stroke-width="3"/>
+      </svg>
+    </button>
+
+    </div>
+
+    <nav class="header-nav">
+      <ul class="header-menu">
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives">Archives</a></li>
+        
+          <li><a href="/editor">Editor</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- 下拉内容放在 header 外，避免被 header 固定高度限制 -->
+<div id="dropdown-content" class="dropdown-content" aria-hidden="true" >
+  <div class="dropdown-inner">
+      <div id="calendar"></div>
+  </div>
+</div>
+
+<!-- Blog 日期 JSON 数据 -->
+<script id="blogDates" type="application/json">
+  ["2025-06-25","2025-07-01","2025-07-02","2025-06-26","2025-07-03","2025-08-18","2025-08-25","2025-08-18","2025-08-26","2025-08-31","2025-09-07","2025-09-06","2025-09-03","2025-09-06","2025-09-06","2025-09-07","2025-06-25"]
+</script>
+  <script>
+    const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
+    console.log('博客文章日期:', blogDates);
+  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('dropdown-toggle');
+  const dropdownContent = document.getElementById('dropdown-content');
+  const sunRays = toggleBtn.querySelector('.sun-rays');
+
+  let isExpanded = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isExpanded) {
+      // 播放太阳收起动画
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      // 先将 max-height 设置为当前内容高度，确保过渡从正确高度开始
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      // 触发重绘，确保浏览器识别新的 max-height
+      dropdownContent.offsetHeight;
+
+      // 延迟设置 max-height 为0，触发过渡动画
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20); // 20ms 的延迟足够触发动画
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+
+    } else {
+      // 播放太阳展开动画
+      sunRays.style.animation = 'rays-expand 0.4s forwards ease-out';
+
+      dropdownContent.style.opacity = '1';
+      dropdownContent.style.pointerEvents = 'auto';
+
+      // 直接设置 max-height 为内容高度，触发展开动画
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      dropdownContent.setAttribute('aria-hidden', 'false');
+      isExpanded = true;
+    }
+  });
+
+  // 点击外部关闭下拉框
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !dropdownContent.contains(e.target) && isExpanded) {
+      sunRays.style.animation = 'rays-collapse 0.4s forwards ease-in';
+
+      dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+      dropdownContent.offsetHeight;
+
+      setTimeout(() => {
+        dropdownContent.style.maxHeight = '0';
+        dropdownContent.style.opacity = '0';
+        dropdownContent.style.pointerEvents = 'none';
+      }, 20);
+
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownContent.setAttribute('aria-hidden', 'true');
+      isExpanded = false;
+    }
+  });
+
+  sunRays.addEventListener('animationend', (e) => {
+    if (e.animationName === 'rays-collapse') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(0)';
+      sunRays.style.opacity = '0';
+    } else if (e.animationName === 'rays-expand') {
+      sunRays.style.animation = '';
+      sunRays.style.transform = 'scale(1)';
+      sunRays.style.opacity = '1';
+    }
+  });
+});
+
+
+
+
+// ...existing code...
+
+let currentYear, currentMonth;
+
+function renderCalendar(year, month, highlightDates) {
+  currentYear = year;
+  currentMonth = month;
+  const calendarEl = document.getElementById('calendar');
+  calendarEl.innerHTML = ''; // 清空
+
+  // 日历头部
+  const headerDiv = document.createElement('div');
+  headerDiv.className = 'calendar-header';
+  headerDiv.style.display = 'flex';
+  headerDiv.style.justifyContent = 'center';
+  headerDiv.style.alignItems = 'center';
+  headerDiv.style.marginBottom = '8px';
+  headerDiv.innerHTML = `
+    <button class="calendar-btn" id="prev-year" title="上一年">&laquo;</button>
+    <button class="calendar-btn" id="prev-month" title="上一月">&lsaquo;</button>
+    <span class="calendar-title" style="margin: 0 12px; font-weight: bold;">
+      ${year}年${month + 1}月
+    </span>
+    <button class="calendar-btn" id="next-month" title="下一月">&rsaquo;</button>
+    <button class="calendar-btn" id="next-year" title="下一年">&raquo;</button>
+  `;
+  calendarEl.appendChild(headerDiv);
+
+  // ...原有表格生成代码...
+  const daysOfWeek = ['日', '一', '二', '三', '四', '五', '六'];
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const firstWeekDay = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+
+  const table = document.createElement('table');
+  table.className = 'calendar-table';
+
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  daysOfWeek.forEach(d => {
+    const th = document.createElement('th');
+    th.textContent = d;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  let row = document.createElement('tr');
+  for (let i = 0; i < firstWeekDay; i++) {
+    row.appendChild(document.createElement('td'));
+  }
+  for (let day = 1; day <= totalDays; day++) {
+    if (row.children.length % 7 === 0) {
+      tbody.appendChild(row);
+      row = document.createElement('tr');
+    }
+    const td = document.createElement('td');
+    td.textContent = day;
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    if (highlightDates.includes(dateStr)) {
+      td.classList.add('highlight');
+    }
+    row.appendChild(td);
+  }
+  while (row.children.length < 7) {
+    row.appendChild(document.createElement('td'));
+  }
+  tbody.appendChild(row);
+  table.appendChild(tbody);
+  calendarEl.appendChild(table);
+
+  // 事件绑定
+  document.getElementById('prev-year').onclick = () => renderCalendar(year - 1, month, highlightDates);
+  document.getElementById('next-year').onclick = () => renderCalendar(year + 1, month, highlightDates);
+  document.getElementById('prev-month').onclick = () => {
+    if (month === 0) {
+      renderCalendar(year - 1, 11, highlightDates);
+    } else {
+      renderCalendar(year, month - 1, highlightDates);
+    }
+  };
+  document.getElementById('next-month').onclick = () => {
+    if (month === 11) {
+      renderCalendar(year + 1, 0, highlightDates);
+    } else {
+      renderCalendar(year, month + 1, highlightDates);
+    }
+  };
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  renderCalendar(now.getFullYear(), now.getMonth(), blogDates);
+  document.querySelector('.dropdown-inner').addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+});
+
+</script>
+
+
+  <main class="container">
+    <aside class="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E7%BC%96%E8%BE%91%E5%99%A8%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">博客编辑器图片上传功能设置说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">依赖安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E9%9B%86%E6%88%90"><span class="toc-number">1.2.</span> <span class="toc-text">后端集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E8%B7%AF%E7%94%B1%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 创建图片上传路由文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E4%B8%BB%E5%BA%94%E7%94%A8%E4%B8%AD%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 在主应用中引入路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%A1%AE%E4%BF%9D%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 确保目录结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E9%9B%86%E6%88%90"><span class="toc-number">1.3.</span> <span class="toc-text">前端集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9B%B4%E6%96%B0%E7%BC%96%E8%BE%91%E5%99%A8JavaScript"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 更新编辑器JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%AE%E4%BF%9D%E7%BC%96%E8%BE%91%E5%99%A8%E9%A1%B5%E9%9D%A2%E5%BC%95%E5%85%A5%E4%BA%86%E5%BF%85%E8%A6%81%E7%9A%84%E5%BA%93"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 确保编辑器页面引入了必要的库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">功能特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">支持的上传方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%B7%AF%E5%BE%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.2.</span> <span class="toc-text">存储路径格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7"><span class="toc-number">1.4.3.</span> <span class="toc-text">安全特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9"><span class="toc-number">1.5.</span> <span class="toc-text">配置选项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%8A%E4%BC%A0%E9%99%90%E5%88%B6"><span class="toc-number">1.5.1.</span> <span class="toc-text">修改上传限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%85%81%E8%AE%B8%E7%9A%84%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text">修改允许的文件类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9Token%E9%AA%8C%E8%AF%81"><span class="toc-number">1.5.3.</span> <span class="toc-text">修改Token验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4"><span class="toc-number">1.7.</span> <span class="toc-text">故障排除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">1.7.1.</span> <span class="toc-text">常见问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E"><span class="toc-number">1.8.</span> <span class="toc-text">API接口说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87"><span class="toc-number">1.8.1.</span> <span class="toc-text">上传单张图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="toc-number">1.8.2.</span> <span class="toc-text">批量上传图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%9B%BE%E7%89%87"><span class="toc-number">1.8.3.</span> <span class="toc-text">删除图片</span></a></li></ol></li></ol></li></ol>
+    </aside>
+    <section class="content">
+      <h1 id="博客编辑器图片上传功能设置说明"><a href="#博客编辑器图片上传功能设置说明" class="headerlink" title="博客编辑器图片上传功能设置说明"></a>博客编辑器图片上传功能设置说明</h1><h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2><p>首先安装必要的npm包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install multer</span><br></pre></td></tr></table></figure>
+
+<p>如果还没有安装其他依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express cors body-parser</span><br></pre></td></tr></table></figure>
+
+<h2 id="后端集成"><a href="#后端集成" class="headerlink" title="后端集成"></a>后端集成</h2><h3 id="1-创建图片上传路由文件"><a href="#1-创建图片上传路由文件" class="headerlink" title="1. 创建图片上传路由文件"></a>1. 创建图片上传路由文件</h3><p>将提供的API代码保存为 <code>routes/image-upload.js</code>（或其他合适的位置）</p>
+<h3 id="2-在主应用中引入路由"><a href="#2-在主应用中引入路由" class="headerlink" title="2. 在主应用中引入路由"></a>2. 在主应用中引入路由</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js 或 server.js</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> imageRoutes = <span class="built_in">require</span>(<span class="string">&#x27;./routes/image-upload&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件</span></span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">json</span>());</span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">static</span>(<span class="string">&#x27;public&#x27;</span>)); <span class="comment">// 确保静态文件服务</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 图片上传API路由</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/api&#x27;</span>, imageRoutes);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他路由...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-确保目录结构"><a href="#3-确保目录结构" class="headerlink" title="3. 确保目录结构"></a>3. 确保目录结构</h3><p>确保你的项目有以下目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">your-project/</span><br><span class="line">├── public/</span><br><span class="line">│   └── images/        # 图片存储目录（会自动创建子目录）</span><br><span class="line">├── routes/</span><br><span class="line">│   └── image-upload.js</span><br><span class="line">└── app.js</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端集成"><a href="#前端集成" class="headerlink" title="前端集成"></a>前端集成</h2><h3 id="1-更新编辑器JavaScript"><a href="#1-更新编辑器JavaScript" class="headerlink" title="1. 更新编辑器JavaScript"></a>1. 更新编辑器JavaScript</h3><p>将增强的 <code>editor.js</code> 代码替换你现有的编辑器脚本。</p>
+<h3 id="2-确保编辑器页面引入了必要的库"><a href="#2-确保编辑器页面引入了必要的库" class="headerlink" title="2. 确保编辑器页面引入了必要的库"></a>2. 确保编辑器页面引入了必要的库</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/marked@4.2.12/marked.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/editor.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h2><h3 id="支持的上传方式"><a href="#支持的上传方式" class="headerlink" title="支持的上传方式"></a>支持的上传方式</h3><ol>
+<li><strong>点击上传按钮</strong> - 选择一个或多个图片文件</li>
+<li><strong>拖拽上传</strong> - 直接将图片拖到编辑器区域</li>
+<li><strong>粘贴上传</strong> - Ctrl+V 粘贴剪贴板中的图片</li>
+</ol>
+<h3 id="存储路径格式"><a href="#存储路径格式" class="headerlink" title="存储路径格式"></a>存储路径格式</h3><p>图片会按照以下格式保存：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/images/年/月/博客标题/图片文件名</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<ul>
+<li>博客标题：<code>我的Vue学习笔记</code></li>
+<li>上传时间：2024年3月</li>
+<li>存储路径：<code>/images/2024/03/我的vue学习笔记/1710123456789-a1b2c3d4.jpg</code></li>
+</ul>
+<h3 id="安全特性"><a href="#安全特性" class="headerlink" title="安全特性"></a>安全特性</h3><ul>
+<li><strong>文件类型验证</strong> - 只允许图片格式</li>
+<li><strong>文件大小限制</strong> - 最大10MB</li>
+<li><strong>路径安全</strong> - 防止目录遍历攻击</li>
+<li><strong>文件名安全</strong> - 自动生成唯一、安全的文件名</li>
+<li><strong>身份验证</strong> - 需要有效token才能上传</li>
+</ul>
+<h2 id="配置选项"><a href="#配置选项" class="headerlink" title="配置选项"></a>配置选项</h2><h3 id="修改上传限制"><a href="#修改上传限制" class="headerlink" title="修改上传限制"></a>修改上传限制</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> upload = <span class="title function_">multer</span>(&#123;</span><br><span class="line">  <span class="attr">storage</span>: storage,</span><br><span class="line">  <span class="attr">limits</span>: &#123;</span><br><span class="line">    <span class="attr">fileSize</span>: <span class="number">5</span> * <span class="number">1024</span> * <span class="number">1024</span>, <span class="comment">// 改为5MB</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改允许的文件类型"><a href="#修改允许的文件类型" class="headerlink" title="修改允许的文件类型"></a>修改允许的文件类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fileFilter</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> allowedTypes = <span class="regexp">/jpeg|jpg|png|gif|webp|svg/</span>; <span class="comment">// 添加svg支持</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改Token验证"><a href="#修改Token验证" class="headerlink" title="修改Token验证"></a>修改Token验证</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在前端 editor.js 中</span></span><br><span class="line"><span class="keyword">const</span> token = <span class="string">&#x27;your-actual-secret-token&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 在后端 image-upload.js 中</span></span><br><span class="line"><span class="keyword">if</span> (token !== <span class="string">&#x27;your-actual-secret-token&#x27;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">403</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;无效的访问令牌&#x27;</span> &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ol>
+<li><p><strong>编写博客时</strong>：</p>
+<ul>
+<li>先输入博客标题</li>
+<li>点击”上传图片”按钮选择图片</li>
+<li>或者直接拖拽图片到编辑器</li>
+<li>或者复制图片后在编辑器中粘贴</li>
+</ul>
+</li>
+<li><p><strong>图片会自动插入Markdown格式</strong>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">图片名称</span>](<span class="link">/images/2024/03/博客标题/文件名.jpg</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>实时预览</strong>：</p>
+<ul>
+<li>右侧预览区域会立即显示上传的图片</li>
+</ul>
+</li>
+</ol>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li><p><strong>上传失败</strong>：</p>
+<ul>
+<li>检查文件大小是否超过限制</li>
+<li>确认文件类型是否支持</li>
+<li>验证token是否正确</li>
+</ul>
+</li>
+<li><p><strong>图片显示不出来</strong>：</p>
+<ul>
+<li>确认 <code>public</code> 目录的静态文件服务已配置</li>
+<li>检查图片文件是否成功保存</li>
+<li>确认路径格式正确</li>
+</ul>
+</li>
+<li><p><strong>权限错误</strong>：</p>
+<ul>
+<li>确保Node.js进程有写入 <code>public/images</code> 目录的权限</li>
+<li>在Linux&#x2F;Mac上可能需要：<code>chmod 755 public/images</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="API接口说明"><a href="#API接口说明" class="headerlink" title="API接口说明"></a>API接口说明</h2><h3 id="上传单张图片"><a href="#上传单张图片" class="headerlink" title="上传单张图片"></a>上传单张图片</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /api/upload-image</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer your-token</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>multipart/form-data</span><br><span class="line"></span><br><span class="line"><span class="attribute">FormData</span>:</span><br><span class="line">- image: 图片文件</span><br><span class="line">- blogTitle: 博客标题</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量上传图片"><a href="#批量上传图片" class="headerlink" title="批量上传图片"></a>批量上传图片</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /api/upload-images</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer your-token</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>multipart/form-data</span><br><span class="line"></span><br><span class="line"><span class="attribute">FormData</span>:</span><br><span class="line">- images: 图片文件数组（最多10个）</span><br><span class="line">- blogTitle: 博客标题</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除图片"><a href="#删除图片" class="headerlink" title="删除图片"></a>删除图片</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DELETE /api/delete-image</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer your-token</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;imagePath&quot;: &quot;images/2024/03/blog-title/filename.jpg&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </section>
+  </main>
+
+  <hr>
+<footer>
+  <p>© 2025 xiahui010421 | Powered by XiaHui</p>
+</footer>
+
+</body>
+<script src="/js/post.js"></script>
+</html>
