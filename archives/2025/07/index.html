@@ -26,7 +26,7 @@
 
     /* 左侧二级菜单 */
     .archive-sidebar {
-      width: 220px; /* 增大侧边栏宽度 */
+      width: 220px;
       flex-shrink: 0;
       background: #f7fafd;
       border-radius: 8px;
@@ -35,6 +35,8 @@
       position: sticky;
       top: 80px;
       height: fit-content;
+      max-height: calc(100vh - 100px);
+      overflow: hidden;
     }
 
     .archive-category-group,
@@ -51,6 +53,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
 
     .archive-group-title:hover {
@@ -70,19 +76,44 @@
     .archive-submenu {
       display: none;
       padding: 8px 0;
+      max-height: 280px;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .archive-group.open .archive-submenu {
       display: block;
     }
 
+    /* 自定义滚动条 */
+    .archive-submenu::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .archive-submenu::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 2px;
+    }
+
+    .archive-submenu::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 2px;
+    }
+
+    .archive-submenu::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+
     .archive-submenu-item {
-      padding: 10px 24px 10px 36px;
-      font-size: 0.95em;
+      padding: 8px 24px 8px 36px;
+      font-size: 0.9em;
       color: #5296d5;
       cursor: pointer;
       display: flex;
       align-items: center;
+      line-height: 1.3;
+      word-break: break-all;
+      transition: all 0.2s;
     }
 
     .archive-submenu-item:hover,
@@ -92,10 +123,43 @@
       font-weight: 500;
     }
 
+    .archive-submenu-item span:first-child {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+
     .archive-submenu-count {
-      margin-left: auto;
-      font-size: 0.85em;
+      font-size: 0.8em;
       color: #999;
+      background: #f0f4f8;
+      padding: 2px 6px;
+      border-radius: 10px;
+      min-width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    /* 添加 "显示全部" 选项 */
+    .show-all-item {
+      padding: 12px 24px;
+      font-size: 0.95em;
+      color: #2d3748;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-bottom: 1px solid #e1e8f0;
+      font-weight: 500;
+    }
+
+    .show-all-item:hover,
+    .show-all-item.active {
+      background: #e7f2fa;
+      color: #2167b8;
     }
 
     /* 右侧文章列表 */
@@ -181,6 +245,18 @@
       font-size: 0.95em;
     }
 
+    /* 当前筛选状态提示 */
+    .current-filter {
+      background: #e3f2fd;
+      border: 1px solid #bbdefb;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      font-size: 0.9em;
+      color: #1976d2;
+      display: none;
+    }
+
     /* 响应式设计 */
     @media (min-width: 1200px) {
       .archive-sidebar {
@@ -207,6 +283,10 @@
       .archive-sidebar {
         width: 100%;
         position: static;
+        max-height: none;
+      }
+      .archive-submenu {
+        max-height: 200px;
       }
       .archive-group-title {
         padding: 12px 16px;
@@ -277,7 +357,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-07","2025-09-06","2025-09-07","2025-08-26","2025-09-06"]
+  ["2025-06-25","2025-07-01","2025-06-26","2025-07-02","2025-07-03","2025-08-18","2025-08-25","2025-08-18","2025-08-26","2025-08-31","2025-09-03","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -474,6 +554,10 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="archive-page">
     <main class="archive-main">
       <aside class="archive-sidebar">
+        <div class="show-all-item active" id="show-all">
+          显示全部文章
+        </div>
+        
         <div class="archive-category-group archive-group open">
           <h3 class="archive-group-title">分类</h3>
           <div class="archive-submenu" id="category-submenu">
@@ -490,14 +574,15 @@ document.addEventListener('DOMContentLoaded', () => {
       </aside>
 
       <section class="archive-content">
+        <div class="current-filter" id="current-filter"></div>
         <div id="archive-list" class="archive-list">
           
             <article class="card post-card"
-              data-category="blog"
-              data-tag="blog">
+              data-category="面试经验,前端开发"
+              data-tag="JavaScript,Vue,面试,前端,浏览器缓存,打包工具,实习">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="面试问题-实习" />
                 
               </div>
               <div class="post-info">
@@ -509,14 +594,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/blog/">blog</a>
+                        <a href="/categories/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C/">面试经验</a>, 
+                      
+                        <a href="/categories/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/JavaScript/">JavaScript</a>, 
+                      
+                        <a href="/tags/Vue/">Vue</a>, 
+                      
+                        <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>, 
+                      
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>, 
+                      
+                        <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98/">浏览器缓存</a>, 
+                      
+                        <a href="/tags/%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/">打包工具</a>, 
+                      
+                        <a href="/tags/%E5%AE%9E%E4%B9%A0/">实习</a>
                       
                     </span>
                   
@@ -526,11 +625,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="blog"
-              data-tag="blog">
+              data-category="技术教程,服务器部署"
+              data-tag="博客搭建,部署,Linux,SSH,SCP,后端开发">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="Linux搭建blog" />
                 
               </div>
               <div class="post-info">
@@ -542,14 +641,26 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/blog/">blog</a>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>, 
+                      
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>, 
+                      
+                        <a href="/tags/%E9%83%A8%E7%BD%B2/">部署</a>, 
+                      
+                        <a href="/tags/Linux/">Linux</a>, 
+                      
+                        <a href="/tags/SSH/">SSH</a>, 
+                      
+                        <a href="/tags/SCP/">SCP</a>, 
+                      
+                        <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
                       
                     </span>
                   
@@ -559,11 +670,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="笔试"
-              data-tag="秋招">
+              data-category="笔试经验,面试准备"
+              data-tag="JavaScript,笔试,秋招,前端面试,算法,数据结构,武汉,哈乐沃">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="武汉哈乐沃笔试" />
                 
               </div>
               <div class="post-info">
@@ -575,14 +686,30 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/%E7%AC%94%E8%AF%95/">笔试</a>
+                        <a href="/categories/%E7%AC%94%E8%AF%95%E7%BB%8F%E9%AA%8C/">笔试经验</a>, 
+                      
+                        <a href="/categories/%E7%AC%94%E8%AF%95%E7%BB%8F%E9%AA%8C/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/">面试准备</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/%E7%A7%8B%E6%8B%9B/">秋招</a>
+                        <a href="/tags/JavaScript/">JavaScript</a>, 
+                      
+                        <a href="/tags/%E7%AC%94%E8%AF%95/">笔试</a>, 
+                      
+                        <a href="/tags/%E7%A7%8B%E6%8B%9B/">秋招</a>, 
+                      
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">前端面试</a>, 
+                      
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>, 
+                      
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>, 
+                      
+                        <a href="/tags/%E6%AD%A6%E6%B1%89/">武汉</a>, 
+                      
+                        <a href="/tags/%E5%93%88%E4%B9%90%E6%B2%83/">哈乐沃</a>
                       
                     </span>
                   
@@ -592,11 +719,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="滴滴代码"
-              data-tag="秋招">
+              data-category="笔试经验,算法题解"
+              data-tag="JavaScript,笔试,秋招,前端面试,算法,贪心算法,滴滴,代码题">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="滴滴" />
                 
               </div>
               <div class="post-info">
@@ -608,14 +735,30 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/%E6%BB%B4%E6%BB%B4%E4%BB%A3%E7%A0%81/">滴滴代码</a>
+                        <a href="/categories/%E7%AC%94%E8%AF%95%E7%BB%8F%E9%AA%8C/">笔试经验</a>, 
+                      
+                        <a href="/categories/%E7%AC%94%E8%AF%95%E7%BB%8F%E9%AA%8C/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/%E7%A7%8B%E6%8B%9B/">秋招</a>
+                        <a href="/tags/JavaScript/">JavaScript</a>, 
+                      
+                        <a href="/tags/%E7%AC%94%E8%AF%95/">笔试</a>, 
+                      
+                        <a href="/tags/%E7%A7%8B%E6%8B%9B/">秋招</a>, 
+                      
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">前端面试</a>, 
+                      
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>, 
+                      
+                        <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>, 
+                      
+                        <a href="/tags/%E6%BB%B4%E6%BB%B4/">滴滴</a>, 
+                      
+                        <a href="/tags/%E4%BB%A3%E7%A0%81%E9%A2%98/">代码题</a>
                       
                     </span>
                   
@@ -625,11 +768,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="work"
-              data-tag="blog">
+              data-category="个人简历,职业发展"
+              data-tag="前端开发,简历,应届生,求职,Web开发,简历模板,打印优化">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="夏慧简历3" />
                 
               </div>
               <div class="post-info">
@@ -641,14 +784,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/work/">work</a>
+                        <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/">个人简历</a>, 
+                      
+                        <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/">职业发展</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/tags/%E7%AE%80%E5%8E%86/">简历</a>, 
+                      
+                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
+                      
+                        <a href="/tags/%E6%B1%82%E8%81%8C/">求职</a>, 
+                      
+                        <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>, 
+                      
+                        <a href="/tags/%E7%AE%80%E5%8E%86%E6%A8%A1%E6%9D%BF/">简历模板</a>, 
+                      
+                        <a href="/tags/%E6%89%93%E5%8D%B0%E4%BC%98%E5%8C%96/">打印优化</a>
                       
                     </span>
                   
@@ -658,11 +815,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="work"
-              data-tag="blog">
+              data-category="个人简历,职业发展"
+              data-tag="前端开发,简历,应届生,求职,Web开发">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="夏慧简历2" />
                 
               </div>
               <div class="post-info">
@@ -674,14 +831,24 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/work/">work</a>
+                        <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/">个人简历</a>, 
+                      
+                        <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/">职业发展</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/tags/%E7%AE%80%E5%8E%86/">简历</a>, 
+                      
+                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
+                      
+                        <a href="/tags/%E6%B1%82%E8%81%8C/">求职</a>, 
+                      
+                        <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>
                       
                     </span>
                   
@@ -691,32 +858,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category=""
-              data-tag="">
+              data-category="个人简历,职业发展"
+              data-tag="前端开发,项目经验,简历,应届生,求职,Web开发,技能总结">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
-                
-              </div>
-              <div class="post-info">
-                <h2 class="post-title">
-                  <a href="/2025/08/26/hello-world/">Hello World</a>
-                </h2>
-                <div class="post-meta">
-                  <time datetime="2025-08-26T08:23:53.025Z">2025-08-26</time>
-                  
-                  
-                </div>
-                
-              </div>
-            </article>
-          
-            <article class="card post-card"
-              data-category="work"
-              data-tag="blog">
-              <div class="post-thumbnail">
-                
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="个人简历" />
                 
               </div>
               <div class="post-info">
@@ -728,14 +874,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/work/">work</a>
+                        <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/">个人简历</a>, 
+                      
+                        <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/">职业发展</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">项目经验</a>, 
+                      
+                        <a href="/tags/%E7%AE%80%E5%8E%86/">简历</a>, 
+                      
+                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
+                      
+                        <a href="/tags/%E6%B1%82%E8%81%8C/">求职</a>, 
+                      
+                        <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>, 
+                      
+                        <a href="/tags/%E6%8A%80%E8%83%BD%E6%80%BB%E7%BB%93/">技能总结</a>
                       
                     </span>
                   
@@ -745,11 +905,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="work"
-              data-tag="blog">
+              data-category="项目经验,技能总结"
+              data-tag="前后端联调,项目经验,CCD系统,Vue,ElementUI,技能优化,简历项目">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="ccd-对应我的简历的相关问题" />
                 
               </div>
               <div class="post-info">
@@ -761,14 +921,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/work/">work</a>
+                        <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">项目经验</a>, 
+                      
+                        <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/%E6%8A%80%E8%83%BD%E6%80%BB%E7%BB%93/">技能总结</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E8%B0%83/">前后端联调</a>, 
+                      
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">项目经验</a>, 
+                      
+                        <a href="/tags/CCD%E7%B3%BB%E7%BB%9F/">CCD系统</a>, 
+                      
+                        <a href="/tags/Vue/">Vue</a>, 
+                      
+                        <a href="/tags/ElementUI/">ElementUI</a>, 
+                      
+                        <a href="/tags/%E6%8A%80%E8%83%BD%E4%BC%98%E5%8C%96/">技能优化</a>, 
+                      
+                        <a href="/tags/%E7%AE%80%E5%8E%86%E9%A1%B9%E7%9B%AE/">简历项目</a>
                       
                     </span>
                   
@@ -778,11 +952,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="blog"
-              data-tag="blog">
+              data-category="开发工具,技术教程"
+              data-tag="VS Code插件,TypeScript,XML,UUID,插件开发,CSV解析,开发工具">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="Extension-xml-uuid" />
                 
               </div>
               <div class="post-info">
@@ -794,14 +968,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/blog/">blog</a>
+                        <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>, 
+                      
+                        <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/VS-Code%E6%8F%92%E4%BB%B6/">VS Code插件</a>, 
+                      
+                        <a href="/tags/TypeScript/">TypeScript</a>, 
+                      
+                        <a href="/tags/XML/">XML</a>, 
+                      
+                        <a href="/tags/UUID/">UUID</a>, 
+                      
+                        <a href="/tags/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>, 
+                      
+                        <a href="/tags/CSV%E8%A7%A3%E6%9E%90/">CSV解析</a>, 
+                      
+                        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
                       
                     </span>
                   
@@ -811,11 +999,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="blog"
-              data-tag="blog">
+              data-category="技术教程,部署发布"
+              data-tag="Hexo,GitHub Pages,自动部署,CI/CD,Git,Shell脚本,静态网站">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="Hexo 网站自动部署到 GitHub Pages" />
                 
               </div>
               <div class="post-info">
@@ -827,14 +1015,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/blog/">blog</a>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>, 
+                      
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E9%83%A8%E7%BD%B2%E5%8F%91%E5%B8%83/">部署发布</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/Hexo/">Hexo</a>, 
+                      
+                        <a href="/tags/GitHub-Pages/">GitHub Pages</a>, 
+                      
+                        <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署</a>, 
+                      
+                        <a href="/tags/CI-CD/">CI/CD</a>, 
+                      
+                        <a href="/tags/Git/">Git</a>, 
+                      
+                        <a href="/tags/Shell%E8%84%9A%E6%9C%AC/">Shell脚本</a>, 
+                      
+                        <a href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/">静态网站</a>
                       
                     </span>
                   
@@ -844,11 +1046,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="travel"
-              data-tag="traval">
+              data-category="旅游攻略,国内游"
+              data-tag="北京,旅游攻略,国内游,故宫,长城,颐和园,行程安排,费用清单">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="北京旅游" />
                 
               </div>
               <div class="post-info">
@@ -860,14 +1062,30 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/travel/">travel</a>
+                        <a href="/categories/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>, 
+                      
+                        <a href="/categories/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/%E5%9B%BD%E5%86%85%E6%B8%B8/">国内游</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/traval/">traval</a>
+                        <a href="/tags/%E5%8C%97%E4%BA%AC/">北京</a>, 
+                      
+                        <a href="/tags/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>, 
+                      
+                        <a href="/tags/%E5%9B%BD%E5%86%85%E6%B8%B8/">国内游</a>, 
+                      
+                        <a href="/tags/%E6%95%85%E5%AE%AB/">故宫</a>, 
+                      
+                        <a href="/tags/%E9%95%BF%E5%9F%8E/">长城</a>, 
+                      
+                        <a href="/tags/%E9%A2%90%E5%92%8C%E5%9B%AD/">颐和园</a>, 
+                      
+                        <a href="/tags/%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92/">行程安排</a>, 
+                      
+                        <a href="/tags/%E8%B4%B9%E7%94%A8%E6%B8%85%E5%8D%95/">费用清单</a>
                       
                     </span>
                   
@@ -877,11 +1095,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="blog"
-              data-tag="blog">
+              data-category="前端开发,技术实践"
+              data-tag="前端开发,前后端联调,Axios,API,Mock数据,接口文档">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="后端连接" />
                 
               </div>
               <div class="post-info">
@@ -893,14 +1111,26 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/blog/">blog</a>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/">技术实践</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E8%B0%83/">前后端联调</a>, 
+                      
+                        <a href="/tags/Axios/">Axios</a>, 
+                      
+                        <a href="/tags/API/">API</a>, 
+                      
+                        <a href="/tags/Mock%E6%95%B0%E6%8D%AE/">Mock数据</a>, 
+                      
+                        <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">接口文档</a>
                       
                     </span>
                   
@@ -910,11 +1140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="traval"
-              data-tag="traval">
+              data-category="旅游攻略,境外游"
+              data-tag="旅游,新加坡,游记,攻略,机票">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="新加坡" />
                 
               </div>
               <div class="post-info">
@@ -926,14 +1156,24 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/traval/">traval</a>
+                        <a href="/categories/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>, 
+                      
+                        <a href="/categories/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/%E5%A2%83%E5%A4%96%E6%B8%B8/">境外游</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/traval/">traval</a>
+                        <a href="/tags/%E6%97%85%E6%B8%B8/">旅游</a>, 
+                      
+                        <a href="/tags/%E6%96%B0%E5%8A%A0%E5%9D%A1/">新加坡</a>, 
+                      
+                        <a href="/tags/%E6%B8%B8%E8%AE%B0/">游记</a>, 
+                      
+                        <a href="/tags/%E6%94%BB%E7%95%A5/">攻略</a>, 
+                      
+                        <a href="/tags/%E6%9C%BA%E7%A5%A8/">机票</a>
                       
                     </span>
                   
@@ -943,11 +1183,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="test"
-              data-tag="blog">
+              data-category="前端开发,技术实现"
+              data-tag="前端开发,JavaScript,日期处理,日历">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="日历添加日期" />
                 
               </div>
               <div class="post-info">
@@ -959,14 +1199,22 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/test/">test</a>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0/">技术实现</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>, 
+                      
+                        <a href="/tags/JavaScript/">JavaScript</a>, 
+                      
+                        <a href="/tags/%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86/">日期处理</a>, 
+                      
+                        <a href="/tags/%E6%97%A5%E5%8E%86/">日历</a>
                       
                     </span>
                   
@@ -976,11 +1224,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>
           
             <article class="card post-card"
-              data-category="test"
-              data-tag="blog">
+              data-category="技术教程,博客搭建"
+              data-tag="Hexo,博客搭建,GitHub Pages,Node.js,教程,部署,前端开发">
               <div class="post-thumbnail">
                 
-                  <div style="width: 100%; height: 100%; background: #f0f4f8;"></div>
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="Hexo 博客搭建总结" />
                 
               </div>
               <div class="post-info">
@@ -992,14 +1240,69 @@ document.addEventListener('DOMContentLoaded', () => {
                   
                     <span class="post-categories">
                       
-                        <a href="/categories/test/">test</a>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>, 
+                      
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
                       
                     </span>
                   
                   
                     <span class="post-tags">
                       
-                        <a href="/tags/blog/">blog</a>
+                        <a href="/tags/Hexo/">Hexo</a>, 
+                      
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>, 
+                      
+                        <a href="/tags/GitHub-Pages/">GitHub Pages</a>, 
+                      
+                        <a href="/tags/Node-js/">Node.js</a>, 
+                      
+                        <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>, 
+                      
+                        <a href="/tags/%E9%83%A8%E7%BD%B2/">部署</a>, 
+                      
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                      
+                    </span>
+                  
+                </div>
+                
+              </div>
+            </article>
+          
+            <article class="card post-card"
+              data-category="博客搭建,入门指南"
+              data-tag="Hexo,博客搭建,入门教程,欢迎文章">
+              <div class="post-thumbnail">
+                
+                  <img src="/images/淘宝店铺忧忧素材库 (982).gif" alt="Hello World" />
+                
+              </div>
+              <div class="post-info">
+                <h2 class="post-title">
+                  <a href="/2025/06/25/hello-world/">Hello World</a>
+                </h2>
+                <div class="post-meta">
+                  <time datetime="2025-06-25T00:00:00.000Z">2025-06-25</time>
+                  
+                    <span class="post-categories">
+                      
+                        <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>, 
+                      
+                        <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">入门指南</a>
+                      
+                    </span>
+                  
+                  
+                    <span class="post-tags">
+                      
+                        <a href="/tags/Hexo/">Hexo</a>, 
+                      
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>, 
+                      
+                        <a href="/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/">入门教程</a>, 
+                      
+                        <a href="/tags/%E6%AC%A2%E8%BF%8E%E6%96%87%E7%AB%A0/">欢迎文章</a>
                       
                     </span>
                   
@@ -1021,6 +1324,31 @@ document.addEventListener('DOMContentLoaded', () => {
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const posts = Array.from(document.querySelectorAll('.post-card'));
+      const currentFilter = document.getElementById('current-filter');
+      const showAllItem = document.getElementById('show-all');
+      
+      // 随机图片数组 - 请根据你的实际图片文件名修改
+      const randomImages = [
+        '/images/淘宝店铺忧忧素材库 (980).gif',
+        '/images/淘宝店铺忧忧素材库 (981).gif',
+        '/images/淘宝店铺忧忧素材库 (982).gif',
+        '/images/淘宝店铺忧忧素材库 (983).gif',
+        '/images/淘宝店铺忧忧素材库 (984).gif',
+        '/images/淘宝店铺忧忧素材库 (985).gif',
+        '/images/淘宝店铺忧忧素材库 (986).gif',
+        '/images/淘宝店铺忧忧素材库 (987).gif',
+      ];
+      
+      // 为没有缩略图的文章随机分配图片
+      document.querySelectorAll('.random-image').forEach(img => {
+        const randomIndex = Math.floor(Math.random() * randomImages.length);
+        img.src = randomImages[randomIndex];
+        
+        // 图片加载失败时使用第一张作为兜底
+        img.onerror = function() {
+          this.src = randomImages[0];
+        };
+      });
       
       // 提取分类和标签并统计数量
       const categoryCount = new Map();
@@ -1029,12 +1357,16 @@ document.addEventListener('DOMContentLoaded', () => {
       posts.forEach(post => {
         if (post.dataset.category) {
           post.dataset.category.split(',').forEach(cat => {
-            categoryCount.set(cat, (categoryCount.get(cat) || 0) + 1);
+            if (cat.trim()) {
+              categoryCount.set(cat.trim(), (categoryCount.get(cat.trim()) || 0) + 1);
+            }
           });
         }
         if (post.dataset.tag) {
           post.dataset.tag.split(',').forEach(tag => {
-            tagCount.set(tag, (tagCount.get(tag) || 0) + 1);
+            if (tag.trim()) {
+              tagCount.set(tag.trim(), (tagCount.get(tag.trim()) || 0) + 1);
+            }
           });
         }
       });
@@ -1045,21 +1377,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!menu) return;
         
         menu.innerHTML = '';
-        items.forEach(item => {
+        // 按名称排序
+        const sortedItems = Array.from(items).sort();
+        
+        sortedItems.forEach(item => {
           const count = type === 'category' ? categoryCount.get(item) : tagCount.get(item);
           const itemEl = document.createElement('div');
           itemEl.className = 'archive-submenu-item';
           itemEl.innerHTML = `
-            <span>${item}</span>
+            <span title="${item}">${item}</span>
             <span class="archive-submenu-count">${count || 0}</span>
           `;
           itemEl.dataset.value = item;
+          itemEl.dataset.type = type;
           itemEl.onclick = function() {
-            document.querySelectorAll('.archive-submenu-item').forEach(el => {
+            // 清除所有活跃状态
+            document.querySelectorAll('.archive-submenu-item, .show-all-item').forEach(el => {
               el.classList.remove('active');
             });
             this.classList.add('active');
             filterPosts(type, item);
+            showCurrentFilter(type, item);
           };
           menu.appendChild(itemEl);
         });
@@ -1067,6 +1405,16 @@ document.addEventListener('DOMContentLoaded', () => {
       
       fillMenu('category-submenu', Array.from(categoryCount.keys()).filter(Boolean), 'category');
       fillMenu('tag-submenu', Array.from(tagCount.keys()).filter(Boolean), 'tag');
+
+      // 显示全部文章功能
+      showAllItem.onclick = function() {
+        document.querySelectorAll('.archive-submenu-item').forEach(el => {
+          el.classList.remove('active');
+        });
+        this.classList.add('active');
+        showAllPosts();
+        hideCurrentFilter();
+      };
 
       // 二级菜单折叠/展开功能
       document.querySelectorAll('.archive-group-title').forEach(title => {
@@ -1078,19 +1426,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 筛选功能
       function filterPosts(type, value) {
+        let visibleCount = 0;
         posts.forEach(post => {
           let shouldShow = false;
           if (type === 'category') {
-            shouldShow = post.dataset.category.split(',').includes(value);
+            shouldShow = post.dataset.category.split(',').map(c => c.trim()).includes(value);
           } else if (type === 'tag') {
-            shouldShow = post.dataset.tag.split(',').includes(value);
+            shouldShow = post.dataset.tag.split(',').map(t => t.trim()).includes(value);
           }
           post.style.display = shouldShow ? 'flex' : 'none';
           if (window.innerWidth <= 900 && shouldShow) {
             post.style.display = 'block';
           }
+          if (shouldShow) visibleCount++;
+        });
+        
+        // 如果没有匹配的文章，显示空状态
+        if (visibleCount === 0) {
+          showEmptyState();
+        } else {
+          hideEmptyState();
+        }
+      }
+
+      // 显示全部文章
+      function showAllPosts() {
+        posts.forEach(post => {
+          post.style.display = 'flex';
+          if (window.innerWidth <= 900) {
+            post.style.display = 'block';
+          }
+        });
+        hideEmptyState();
+      }
+
+      // 显示当前筛选状态
+      function showCurrentFilter(type, value) {
+        const typeText = type === 'category' ? '分类' : '标签';
+        currentFilter.textContent = `当前筛选：${typeText} - ${value}`;
+        currentFilter.style.display = 'block';
+      }
+
+      // 隐藏筛选状态提示
+      function hideCurrentFilter() {
+        currentFilter.style.display = 'none';
+      }
+
+      // 显示空状态
+      function showEmptyState() {
+        const archiveList = document.getElementById('archive-list');
+        let emptyEl = document.querySelector('.archive-empty');
+        if (!emptyEl) {
+          emptyEl = document.createElement('div');
+          emptyEl.className = 'archive-empty';
+          emptyEl.textContent = '没有找到匹配的文章';
+          archiveList.appendChild(emptyEl);
+        }
+        emptyEl.style.display = 'block';
+      }
+
+      // 隐藏空状态
+      function hideEmptyState() {
+        const emptyEl = document.querySelector('.archive-empty');
+        if (emptyEl) {
+          emptyEl.style.display = 'none';
+        }
+      }
+
+      // 响应式处理
+      function handleResize() {
+        const isMobile = window.innerWidth <= 900;
+        posts.forEach(post => {
+          if (post.style.display !== 'none') {
+            post.style.display = isMobile ? 'block' : 'flex';
+          }
         });
       }
+
+      window.addEventListener('resize', handleResize);
     });
   </script>
 </body>
