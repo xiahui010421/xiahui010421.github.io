@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const currentFilter = document.getElementById('current-filter');
   const showAllItem = document.getElementById('show-all');
   
-  // 随机图片数组 - 请根据你的实际图片文件名修改
+  // 随机图片数组
   const randomImages = [
-    '/images/1.gif', // 修正了扩展名
+    '/images/1.gif', 
     '/images/2.gif',
     '/images/3.gif',
     '/images/4.gif',
