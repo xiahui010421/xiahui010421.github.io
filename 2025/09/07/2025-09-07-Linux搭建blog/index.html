@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <title>Linux搭建blog - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/css/post.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
-
-
 <body class="post-page">
-
   <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/down.css" />
 
@@ -64,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -258,28 +253,215 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+  
+  <!-- 编辑模式切换按钮 -->
+  <div class="post-controls">
+    <button id="toggle-edit" class="btn-edit-toggle" title="切换编辑模式">
+      <span class="edit-icon">✏️</span>
+      <span class="edit-text">编辑</span>
+    </button>
+    <button id="save-post" class="btn-save-post" style="display: none;" title="保存文章">
+      <span class="save-icon">💾</span>
+      <span class="save-text">保存</span>
+    </button>
+  </div>
 
   <main class="container">
     <aside class="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5liunx"><span class="toc-number">1.</span> <span class="toc-text">进入liunx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8Aliunx%E7%9A%84%E4%BC%A0%E8%BF%87%E6%9D%A5"><span class="toc-number">2.</span> <span class="toc-text">把liunx的传过来</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF"><span class="toc-number"></span> <span class="toc-text">部署后端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-cors"><span class="toc-number">1.</span> <span class="toc-text">npm install cors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-express"><span class="toc-number">2.</span> <span class="toc-text">npm install express</span></a></li></ol>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5liunx"><span class="toc-number">1.</span> <span class="toc-text">进入liunx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8Aliunx%E7%9A%84%E4%BC%A0%E8%BF%87%E6%9D%A5"><span class="toc-number">2.</span> <span class="toc-text">把liunx的传过来</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF"><span class="toc-number"></span> <span class="toc-text">部署后端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-cors"><span class="toc-number">1.</span> <span class="toc-text">npm install cors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-express"><span class="toc-number">2.</span> <span class="toc-text">npm install express</span></a></li></ol>
+      </div>
     </aside>
+    
     <section class="content">
-      <h2 id="进入liunx"><a href="#进入liunx" class="headerlink" title="进入liunx"></a>进入liunx</h2><ul>
-<li>ssh <a href="mailto:&#x78;&#105;&#x61;&#x68;&#117;&#105;&#64;&#49;&#50;&#x31;&#46;&#52;&#48;&#46;&#x33;&#55;&#x2e;&#x37;&#55;">xiahui@121.40.37.77</a></li>
+      <!-- 文章元信息编辑区 -->
+      <div class="post-meta-edit" id="post-meta-edit" style="display: none;">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" value="Linux搭建blog" placeholder="文章标题">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-date">发布日期</label>
+            <input type="datetime-local" id="edit-date" value="2025-09-07T01:42">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-categories">分类</label>
+            <input type="text" id="edit-categories" value="技术教程, 服务器部署" placeholder="分类1, 分类2...">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-tags">标签</label>
+            <input type="text" id="edit-tags" value="博客搭建, 部署, Linux, SSH, SCP, 后端开发" placeholder="标签1, 标签2...">
+          </div>
+          
+          <div class="meta-item meta-item-full">
+            <label for="edit-thumbnail">缩略图</label>
+            <input type="text" id="edit-thumbnail" value="" placeholder="图片URL（可选）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑工具栏 -->
+      <div class="edit-toolbar" id="edit-toolbar" style="display: none;">
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="行内代码">
+            &lt;/&gt;
+          </button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="heading1" title="标题1">H1</button>
+          <button type="button" class="toolbar-btn" data-action="heading2" title="标题2">H2</button>
+          <button type="button" class="toolbar-btn" data-action="heading3" title="标题3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="link" title="插入链接">🔗</button>
+          <button type="button" class="toolbar-btn" data-action="image" title="插入图片">🖼️</button>
+          <input type="file" id="image-upload" accept="image/*" style="display: none;" multiple>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="quote" title="引用">❝</button>
+          <button type="button" class="toolbar-btn" data-action="list" title="列表">•</button>
+          <button type="button" class="toolbar-btn" data-action="codeblock" title="代码块">{ }</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn toggle-preview" data-action="preview" title="预览">👁️</button>
+        </div>
+      </div>
+
+      <!-- 文章内容显示区 -->
+      <article class="post-content" id="post-content">
+        <h2 id="进入liunx"><a href="#进入liunx" class="headerlink" title="进入liunx"></a>进入liunx</h2><ul>
+<li>ssh <a href="mailto:&#x78;&#x69;&#x61;&#104;&#x75;&#105;&#64;&#49;&#50;&#49;&#46;&#x34;&#x30;&#x2e;&#x33;&#55;&#x2e;&#x37;&#55;">xiahui@121.40.37.77</a></li>
 </ul>
 <h2 id="把liunx的传过来"><a href="#把liunx的传过来" class="headerlink" title="把liunx的传过来"></a>把liunx的传过来</h2><ul>
-<li>scp -r <a href="mailto:&#x78;&#x69;&#97;&#104;&#117;&#105;&#x40;&#x31;&#x32;&#49;&#46;&#x34;&#x30;&#x2e;&#51;&#55;&#46;&#x37;&#55;">xiahui@121.40.37.77</a>:&#x2F;home&#x2F;xiahui&#x2F;xiahui_blog ~&#x2F;Desktop&#x2F;</li>
-<li>scp -r  ~&#x2F;Desktop&#x2F; <a href="mailto:&#120;&#105;&#97;&#104;&#117;&#105;&#x40;&#x31;&#50;&#49;&#x2e;&#52;&#x30;&#x2e;&#51;&#x37;&#46;&#x37;&#x37;">xiahui@121.40.37.77</a>:&#x2F;home&#x2F;xiahui&#x2F;xiahui_blog</li>
+<li>scp -r <a href="mailto:&#120;&#105;&#x61;&#x68;&#117;&#x69;&#x40;&#x31;&#x32;&#x31;&#46;&#x34;&#48;&#x2e;&#x33;&#55;&#x2e;&#55;&#x37;">xiahui@121.40.37.77</a>:&#x2F;home&#x2F;xiahui&#x2F;xiahui_blog ~&#x2F;Desktop&#x2F;</li>
+<li>scp -r  ~&#x2F;Desktop&#x2F; <a href="mailto:&#x78;&#x69;&#97;&#x68;&#117;&#105;&#x40;&#49;&#x32;&#49;&#x2e;&#x34;&#x30;&#x2e;&#51;&#x37;&#x2e;&#x37;&#55;">xiahui@121.40.37.77</a>:&#x2F;home&#x2F;xiahui&#x2F;xiahui_blog</li>
 </ul>
 <h1 id="部署后端"><a href="#部署后端" class="headerlink" title="部署后端"></a>部署后端</h1><h2 id="npm-install-cors"><a href="#npm-install-cors" class="headerlink" title="npm install cors"></a>npm install cors</h2><h2 id="npm-install-express"><a href="#npm-install-express" class="headerlink" title="npm install express"></a>npm install express</h2>
+      </article>
+
+      <!-- 编辑器 -->
+      <div class="post-editor" id="post-editor" style="display: none;">
+        <div class="editor-container">
+          <textarea id="markdown-editor" class="markdown-textarea" placeholder="开始编辑你的文章...">---
+title: Linux搭建blog
+date: 2025-09-07T09:42:00.000Z
+tags: [Linux, SSH, SCP, 博客搭建, 部署, 后端开发]
+categories: [技术教程, 服务器部署]
+---
+
+## 进入liunx
+
+- ssh xiahui@121.40.37.77
+
+## 把liunx的传过来
+
+- scp -r xiahui@121.40.37.77:/home/xiahui/xiahui_blog ~/Desktop/
+- scp -r  ~/Desktop/ xiahui@121.40.37.77:/home/xiahui/xiahui_blog
+
+#  部署后端
+
+## npm install cors
+
+## npm install express
+</textarea>
+        </div>
+      </div>
+
+      <!-- 预览区 -->
+      <div class="post-preview" id="post-preview" style="display: none;">
+        <div class="preview-header">
+          <h3>预览</h3>
+          <button type="button" class="btn-refresh-preview" id="refresh-preview">🔄 刷新</button>
+        </div>
+        <div class="preview-content" id="preview-content">
+          <!-- 预览内容将通过JS渲染 -->
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 图片上传模态框 -->
+  <div class="modal" id="image-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入图片</h4>
+        <button type="button" class="btn-close" onclick="closeImageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="upload-tabs">
+          <button type="button" class="tab-btn active" data-tab="upload">上传图片</button>
+          <button type="button" class="tab-btn" data-tab="url">图片链接</button>
+        </div>
+        
+        <div class="tab-content" id="upload-tab">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-placeholder">
+              <div class="upload-icon">📁</div>
+              <p>拖拽图片到这里或点击选择</p>
+              <small>支持 JPG, PNG, GIF, WebP 格式，最大 5MB</small>
+            </div>
+          </div>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+        
+        <div class="tab-content" id="url-tab" style="display: none;">
+          <div class="form-group">
+            <label for="image-url">图片链接</label>
+            <input type="url" id="image-url" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label for="image-alt">替代文本</label>
+            <input type="text" id="image-alt" placeholder="图片描述（可选）">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="insertImageUrl()">插入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接插入模态框 -->
+  <div class="modal" id="link-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入链接</h4>
+        <button type="button" class="btn-close" onclick="closeLinkModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="link-text">链接文本</label>
+          <input type="text" id="link-text" placeholder="显示的文本">
+        </div>
+        <div class="form-group">
+          <label for="link-url">链接地址</label>
+          <input type="url" id="link-url" placeholder="https://example.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeLinkModal()">取消</button>
+        <button type="button" class="btn btn-primary" onclick="insertLink()">插入</button>
+      </div>
+    </div>
+  </div>
 
   <hr>
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
 
+  <script src="/js/post.js"></script>
 </body>
-<script src="/js/post.js"></script>
 </html>

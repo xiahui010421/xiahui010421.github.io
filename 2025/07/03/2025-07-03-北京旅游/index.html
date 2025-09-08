@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <title>北京旅游 - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/css/post.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
-
-
 <body class="post-page">
-
   <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/down.css" />
 
@@ -64,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -258,13 +253,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+  
+  <!-- 编辑模式切换按钮 -->
+  <div class="post-controls">
+    <button id="toggle-edit" class="btn-edit-toggle" title="切换编辑模式">
+      <span class="edit-icon">✏️</span>
+      <span class="edit-text">编辑</span>
+    </button>
+    <button id="save-post" class="btn-save-post" style="display: none;" title="保存文章">
+      <span class="save-icon">💾</span>
+      <span class="save-text">保存</span>
+    </button>
+  </div>
 
   <main class="container">
     <aside class="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%97%E4%BA%AC%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92"><span class="toc-number">1.</span> <span class="toc-text">北京行程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%88%EF%B8%8F-%E4%BA%A4%E9%80%9A%E5%AE%89%E6%8E%92"><span class="toc-number">1.1.</span> <span class="toc-text">✈️ 交通安排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%85-%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92"><span class="toc-number">1.2.</span> <span class="toc-text">📅 行程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%889%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%BA%94%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">7月9日（星期五）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8810%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E5%85%AD%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">7月10日（星期六）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8811%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E6%97%A5%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">7月11日（星期日）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8812%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%B8%80%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">7月12日（星期一）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8813%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%BA%8C%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">7月13日（星期二）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8814%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%B8%89%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">7月14日（星期三）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8815%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E5%9B%9B%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">7月15日（星期四）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%B0-%E8%B4%B9%E7%94%A8%E6%B8%85%E5%8D%95"><span class="toc-number">1.3.</span> <span class="toc-text">💰 费用清单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E5%B7%B2%E7%A1%AE%E8%AE%A4%E6%94%AF%E5%87%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">✅ 已确认支出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9D%97-%E6%9C%AA%E7%A1%AE%E8%AE%A4%E6%94%AF%E5%87%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">❗ 未确认支出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8D%BD%EF%B8%8F-%E5%90%83%E9%A5%AD%E8%8A%B1%E8%B4%B9"><span class="toc-number">1.4.</span> <span class="toc-text">🍽️ 吃饭花费</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%96-%E5%87%BA%E8%A1%8C%E6%89%93%E8%BD%A6-%E5%85%AC%E4%BA%A4-%E5%9C%B0%E9%93%81"><span class="toc-number">1.5.</span> <span class="toc-text">🚖 出行打车 &#x2F; 公交 &#x2F; 地铁</span></a></li></ol></li></ol>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%97%E4%BA%AC%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92"><span class="toc-number">1.</span> <span class="toc-text">北京行程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%88%EF%B8%8F-%E4%BA%A4%E9%80%9A%E5%AE%89%E6%8E%92"><span class="toc-number">1.1.</span> <span class="toc-text">✈️ 交通安排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%85-%E8%A1%8C%E7%A8%8B%E5%AE%89%E6%8E%92"><span class="toc-number">1.2.</span> <span class="toc-text">📅 行程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%889%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%BA%94%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">7月9日（星期五）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8810%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E5%85%AD%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">7月10日（星期六）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8811%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E6%97%A5%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">7月11日（星期日）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8812%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%B8%80%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">7月12日（星期一）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8813%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%BA%8C%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">7月13日（星期二）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8814%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E4%B8%89%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">7月14日（星期三）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E6%9C%8815%E6%97%A5%EF%BC%88%E6%98%9F%E6%9C%9F%E5%9B%9B%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">7月15日（星期四）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%B0-%E8%B4%B9%E7%94%A8%E6%B8%85%E5%8D%95"><span class="toc-number">1.3.</span> <span class="toc-text">💰 费用清单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E5%B7%B2%E7%A1%AE%E8%AE%A4%E6%94%AF%E5%87%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">✅ 已确认支出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9D%97-%E6%9C%AA%E7%A1%AE%E8%AE%A4%E6%94%AF%E5%87%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">❗ 未确认支出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8D%BD%EF%B8%8F-%E5%90%83%E9%A5%AD%E8%8A%B1%E8%B4%B9"><span class="toc-number">1.4.</span> <span class="toc-text">🍽️ 吃饭花费</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%96-%E5%87%BA%E8%A1%8C%E6%89%93%E8%BD%A6-%E5%85%AC%E4%BA%A4-%E5%9C%B0%E9%93%81"><span class="toc-number">1.5.</span> <span class="toc-text">🚖 出行打车 &#x2F; 公交 &#x2F; 地铁</span></a></li></ol></li></ol>
+      </div>
     </aside>
+    
     <section class="content">
-      <h1 id="北京行程安排"><a href="#北京行程安排" class="headerlink" title="北京行程安排"></a>北京行程安排</h1><h2 id="✈️-交通安排"><a href="#✈️-交通安排" class="headerlink" title="✈️ 交通安排"></a>✈️ 交通安排</h2><ul>
+      <!-- 文章元信息编辑区 -->
+      <div class="post-meta-edit" id="post-meta-edit" style="display: none;">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" value="北京旅游" placeholder="文章标题">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-date">发布日期</label>
+            <input type="datetime-local" id="edit-date" value="2025-07-03T09:24">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-categories">分类</label>
+            <input type="text" id="edit-categories" value="旅游攻略, 国内游" placeholder="分类1, 分类2...">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-tags">标签</label>
+            <input type="text" id="edit-tags" value="北京, 旅游攻略, 国内游, 故宫, 长城, 颐和园, 行程安排, 费用清单" placeholder="标签1, 标签2...">
+          </div>
+          
+          <div class="meta-item meta-item-full">
+            <label for="edit-thumbnail">缩略图</label>
+            <input type="text" id="edit-thumbnail" value="" placeholder="图片URL（可选）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑工具栏 -->
+      <div class="edit-toolbar" id="edit-toolbar" style="display: none;">
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="行内代码">
+            &lt;/&gt;
+          </button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="heading1" title="标题1">H1</button>
+          <button type="button" class="toolbar-btn" data-action="heading2" title="标题2">H2</button>
+          <button type="button" class="toolbar-btn" data-action="heading3" title="标题3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="link" title="插入链接">🔗</button>
+          <button type="button" class="toolbar-btn" data-action="image" title="插入图片">🖼️</button>
+          <input type="file" id="image-upload" accept="image/*" style="display: none;" multiple>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="quote" title="引用">❝</button>
+          <button type="button" class="toolbar-btn" data-action="list" title="列表">•</button>
+          <button type="button" class="toolbar-btn" data-action="codeblock" title="代码块">{ }</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn toggle-preview" data-action="preview" title="预览">👁️</button>
+        </div>
+      </div>
+
+      <!-- 文章内容显示区 -->
+      <article class="post-content" id="post-content">
+        <h1 id="北京行程安排"><a href="#北京行程安排" class="headerlink" title="北京行程安排"></a>北京行程安排</h1><h2 id="✈️-交通安排"><a href="#✈️-交通安排" class="headerlink" title="✈️ 交通安排"></a>✈️ 交通安排</h2><ul>
 <li>7月9日（星期五）8:10 飞机，10:40 抵达北京大兴机场</li>
 <li>乘坐大兴草桥线（第一趟免费），然后打车至酒店</li>
 <li>回程：7月15日（星期四）18:00 飞机，15:00 从酒店出发前往大兴草桥站转机场</li>
@@ -400,14 +479,227 @@ document.addEventListener('DOMContentLoaded', () => {
 </li>
 </ul>
 
+      </article>
+
+      <!-- 编辑器 -->
+      <div class="post-editor" id="post-editor" style="display: none;">
+        <div class="editor-container">
+          <textarea id="markdown-editor" class="markdown-textarea" placeholder="开始编辑你的文章...">---
+title: 北京旅游
+date: 2025-07-03T17:24:00.000Z
+tags: [北京, 旅游攻略, 国内游, 故宫, 长城, 颐和园, 行程安排, 费用清单]
+categories: [旅游攻略, 国内游]
+---
+
+# 北京行程安排
+
+## ✈️ 交通安排
+- 7月9日（星期五）8:10 飞机，10:40 抵达北京大兴机场
+- 乘坐大兴草桥线（第一趟免费），然后打车至酒店
+- 回程：7月15日（星期四）18:00 飞机，15:00 从酒店出发前往大兴草桥站转机场
+
+---
+
+## 📅 行程安排
+
+### **7月9日（星期五）**
+- 抵达北京，入住酒店
+- 吃饭、休息、调整
+
+---
+
+### **7月10日（星期六）**
+- 10:15 到毛主席纪念馆
+- 10:30 参观天安门广场
+- 北海公园
+- 午餐
+- 下午：天坛
+
+---
+
+### **7月11日（星期日）**
+- 人民大会堂
+- 中国国家博物馆
+
+---
+
+### **7月12日（星期一）**
+- 长城一日游  
+  - 缆车：280 元  
+  - 大巴：160 元  
+  - P4 停车场（13:00 - 17:00）
+
+---
+
+### **7月13日（星期二）**
+- 上午：故宫（门票 60+30 元）
+- 景山公园
+
+---
+
+### **7月14日（星期三）**
+- 颐和园（门票 60 元）
+- 清华大学、北京大学
+- 圆明园
+
+---
+
+### **7月15日（星期四）**
+- 中国考古博物馆
+- 中国共产党历史馆
+- 鸟巢、水立方
+- 下午：外卖烤鸭和点心
+- 15:00 出发前往大兴机场
+
+---
+
+## 💰 费用清单
+
+### ✅ 已确认支出
+- 飞机：2680 元
+- 酒店：2298 元
+- 总计：4978 元
+- 星期六：1006 元
+- 星期天：422 元
+- 大兴草桥线首趟免费
+- 剩余预算：3000 元
+- 门票合计（442 元）：
+  - 故宫：90 元  
+  - 人民大会堂：30 元  
+  - 天坛：34 元  
+  - 北海：20 元  
+  - 游船：180 元  
+  - 毛主席纪念馆相片：68 元  
+  - 照片：20 元  
+
+- 凤冠：124 元
+
+### ❗ 未确认支出
+- 长城门票：60 元
+- 缆车：280 元
+- 大巴：160 元
+- P4 停车场：待确认费用
+
+---
+
+## 🍽️ 吃饭花费
+- 绿豆粥：2 元  
+- 机场：17 + 5 元  
+- 南门涮肉：165 元  
+- 便利店：36 元  
+- 中饭：23 元  
+- 水：5 元  
+- 晚饭：75 元  
+- 外卖：90 元  
+**合计：418 元**
+
+- 国博中饭：56 元  
+- 晚饭：200 元  
+**合计：256 元**
+
+- 长城中饭：25 元
+
+---
+
+## 🚖 出行打车 / 公交 / 地铁
+- 家→机场：30 元  
+- 草桥→酒店：38 元  
+- 北海→天坛：30 元  
+- 天坛→酒店：26 元  
+- 南门涮肉→酒店：13 元  
+- 地铁：6 元  
+- 公交：2 元  
+**合计：145 元**
+
+- 酒店→人民大会堂：15.6 元  
+- 公交：2 元  
+- 国博→酒店：23 元  
+**合计：42 元**
+</textarea>
+        </div>
+      </div>
+
+      <!-- 预览区 -->
+      <div class="post-preview" id="post-preview" style="display: none;">
+        <div class="preview-header">
+          <h3>预览</h3>
+          <button type="button" class="btn-refresh-preview" id="refresh-preview">🔄 刷新</button>
+        </div>
+        <div class="preview-content" id="preview-content">
+          <!-- 预览内容将通过JS渲染 -->
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 图片上传模态框 -->
+  <div class="modal" id="image-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入图片</h4>
+        <button type="button" class="btn-close" onclick="closeImageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="upload-tabs">
+          <button type="button" class="tab-btn active" data-tab="upload">上传图片</button>
+          <button type="button" class="tab-btn" data-tab="url">图片链接</button>
+        </div>
+        
+        <div class="tab-content" id="upload-tab">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-placeholder">
+              <div class="upload-icon">📁</div>
+              <p>拖拽图片到这里或点击选择</p>
+              <small>支持 JPG, PNG, GIF, WebP 格式，最大 5MB</small>
+            </div>
+          </div>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+        
+        <div class="tab-content" id="url-tab" style="display: none;">
+          <div class="form-group">
+            <label for="image-url">图片链接</label>
+            <input type="url" id="image-url" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label for="image-alt">替代文本</label>
+            <input type="text" id="image-alt" placeholder="图片描述（可选）">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="insertImageUrl()">插入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接插入模态框 -->
+  <div class="modal" id="link-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入链接</h4>
+        <button type="button" class="btn-close" onclick="closeLinkModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="link-text">链接文本</label>
+          <input type="text" id="link-text" placeholder="显示的文本">
+        </div>
+        <div class="form-group">
+          <label for="link-url">链接地址</label>
+          <input type="url" id="link-url" placeholder="https://example.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeLinkModal()">取消</button>
+        <button type="button" class="btn btn-primary" onclick="insertLink()">插入</button>
+      </div>
+    </div>
+  </div>
 
   <hr>
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
 
+  <script src="/js/post.js"></script>
 </body>
-<script src="/js/post.js"></script>
 </html>

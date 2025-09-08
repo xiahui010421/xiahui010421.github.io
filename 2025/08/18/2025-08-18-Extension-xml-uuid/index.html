@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <title>Extension-xml-uuid - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/css/post.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
-
-
 <body class="post-page">
-
   <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/down.css" />
 
@@ -64,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -258,13 +253,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+  
+  <!-- 编辑模式切换按钮 -->
+  <div class="post-controls">
+    <button id="toggle-edit" class="btn-edit-toggle" title="切换编辑模式">
+      <span class="edit-icon">✏️</span>
+      <span class="edit-text">编辑</span>
+    </button>
+    <button id="save-post" class="btn-save-post" style="display: none;" title="保存文章">
+      <span class="save-icon">💾</span>
+      <span class="save-text">保存</span>
+    </button>
+  </div>
 
   <main class="container">
     <aside class="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XML-UUID-Hover-%E6%8F%92%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97%EF%BC%88%E6%B8%85%E6%99%B0%E7%89%88%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">XML UUID Hover 插件操作指南（清晰版）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">1️⃣ 准备环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E5%AE%89%E8%A3%85-VS-Code-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">2️⃣ 安装 VS Code 插件开发工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E5%88%9B%E5%BB%BA%E6%8F%92%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3️⃣ 创建插件工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%B8%8F%E2%83%A3-%E5%AE%89%E8%A3%85-CSV-%E8%A7%A3%E6%9E%90%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">4️⃣ 安装 CSV 解析库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%B8%8F%E2%83%A3-%E5%88%9B%E5%BB%BA-CSV-%E6%96%87%E4%BB%B6"><span class="toc-number">1.5.</span> <span class="toc-text">5️⃣ 创建 CSV 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%EF%B8%8F%E2%83%A3-%E4%BF%AE%E6%94%B9-package-json"><span class="toc-number">1.6.</span> <span class="toc-text">6️⃣ 修改 package.json</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-activationEvents"><span class="toc-number">1.6.1.</span> <span class="toc-text">1. activationEvents</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-contributes"><span class="toc-number">1.6.2.</span> <span class="toc-text">2. contributes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%EF%B8%8F%E2%83%A3-%E6%9B%BF%E6%8D%A2-src-extension-ts"><span class="toc-number">1.7.</span> <span class="toc-text">7️⃣ 替换 src&#x2F;extension.ts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%EF%B8%8F%E2%83%A3-%E8%BF%90%E8%A1%8C%E6%8F%92%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">8️⃣ 运行插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%EF%B8%8F%E2%83%A3-%E6%89%93%E5%8C%85%E6%8F%92%E4%BB%B6"><span class="toc-number">1.9.</span> <span class="toc-text">9️⃣ 打包插件</span></a></li></ol></li></ol>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XML-UUID-Hover-%E6%8F%92%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97%EF%BC%88%E6%B8%85%E6%99%B0%E7%89%88%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">XML UUID Hover 插件操作指南（清晰版）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">1️⃣ 准备环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E5%AE%89%E8%A3%85-VS-Code-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">2️⃣ 安装 VS Code 插件开发工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E5%88%9B%E5%BB%BA%E6%8F%92%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3️⃣ 创建插件工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%B8%8F%E2%83%A3-%E5%AE%89%E8%A3%85-CSV-%E8%A7%A3%E6%9E%90%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">4️⃣ 安装 CSV 解析库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%B8%8F%E2%83%A3-%E5%88%9B%E5%BB%BA-CSV-%E6%96%87%E4%BB%B6"><span class="toc-number">1.5.</span> <span class="toc-text">5️⃣ 创建 CSV 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%EF%B8%8F%E2%83%A3-%E4%BF%AE%E6%94%B9-package-json"><span class="toc-number">1.6.</span> <span class="toc-text">6️⃣ 修改 package.json</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-activationEvents"><span class="toc-number">1.6.1.</span> <span class="toc-text">1. activationEvents</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-contributes"><span class="toc-number">1.6.2.</span> <span class="toc-text">2. contributes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%EF%B8%8F%E2%83%A3-%E6%9B%BF%E6%8D%A2-src-extension-ts"><span class="toc-number">1.7.</span> <span class="toc-text">7️⃣ 替换 src&#x2F;extension.ts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%EF%B8%8F%E2%83%A3-%E8%BF%90%E8%A1%8C%E6%8F%92%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">8️⃣ 运行插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%EF%B8%8F%E2%83%A3-%E6%89%93%E5%8C%85%E6%8F%92%E4%BB%B6"><span class="toc-number">1.9.</span> <span class="toc-text">9️⃣ 打包插件</span></a></li></ol></li></ol>
+      </div>
     </aside>
+    
     <section class="content">
-      <h1 id="XML-UUID-Hover-插件操作指南（清晰版）"><a href="#XML-UUID-Hover-插件操作指南（清晰版）" class="headerlink" title="XML UUID Hover 插件操作指南（清晰版）"></a>XML UUID Hover 插件操作指南（清晰版）</h1><h2 id="1️⃣-准备环境"><a href="#1️⃣-准备环境" class="headerlink" title="1️⃣ 准备环境"></a>1️⃣ 准备环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 Node.js 和 npm 版本</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+      <!-- 文章元信息编辑区 -->
+      <div class="post-meta-edit" id="post-meta-edit" style="display: none;">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" value="Extension-xml-uuid" placeholder="文章标题">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-date">发布日期</label>
+            <input type="datetime-local" id="edit-date" value="2025-08-18T05:35">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-categories">分类</label>
+            <input type="text" id="edit-categories" value="开发工具, 技术教程" placeholder="分类1, 分类2...">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-tags">标签</label>
+            <input type="text" id="edit-tags" value="VS Code插件, TypeScript, XML, UUID, 插件开发, CSV解析, 开发工具" placeholder="标签1, 标签2...">
+          </div>
+          
+          <div class="meta-item meta-item-full">
+            <label for="edit-thumbnail">缩略图</label>
+            <input type="text" id="edit-thumbnail" value="" placeholder="图片URL（可选）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑工具栏 -->
+      <div class="edit-toolbar" id="edit-toolbar" style="display: none;">
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="行内代码">
+            &lt;/&gt;
+          </button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="heading1" title="标题1">H1</button>
+          <button type="button" class="toolbar-btn" data-action="heading2" title="标题2">H2</button>
+          <button type="button" class="toolbar-btn" data-action="heading3" title="标题3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="link" title="插入链接">🔗</button>
+          <button type="button" class="toolbar-btn" data-action="image" title="插入图片">🖼️</button>
+          <input type="file" id="image-upload" accept="image/*" style="display: none;" multiple>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="quote" title="引用">❝</button>
+          <button type="button" class="toolbar-btn" data-action="list" title="列表">•</button>
+          <button type="button" class="toolbar-btn" data-action="codeblock" title="代码块">{ }</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn toggle-preview" data-action="preview" title="预览">👁️</button>
+        </div>
+      </div>
+
+      <!-- 文章内容显示区 -->
+      <article class="post-content" id="post-content">
+        <h1 id="XML-UUID-Hover-插件操作指南（清晰版）"><a href="#XML-UUID-Hover-插件操作指南（清晰版）" class="headerlink" title="XML UUID Hover 插件操作指南（清晰版）"></a>XML UUID Hover 插件操作指南（清晰版）</h1><h2 id="1️⃣-准备环境"><a href="#1️⃣-准备环境" class="headerlink" title="1️⃣ 准备环境"></a>1️⃣ 准备环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 Node.js 和 npm 版本</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
 
 <p>确保 Node.js &gt;&#x3D;18、npm 可用。</p>
 <hr>
@@ -318,14 +397,330 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <p>生成 <code>.vsix</code> 文件，可以在 VS Code 扩展面板 → … → Install from VSIX 安装。</p>
 
+      </article>
+
+      <!-- 编辑器 -->
+      <div class="post-editor" id="post-editor" style="display: none;">
+        <div class="editor-container">
+          <textarea id="markdown-editor" class="markdown-textarea" placeholder="开始编辑你的文章...">---
+title: Extension-xml-uuid
+date: 2025-08-18T13:35:00.000Z
+tags: [VS Code插件, TypeScript, XML, UUID, 插件开发, CSV解析, 开发工具]
+categories: [开发工具, 技术教程]
+---
+
+# XML UUID Hover 插件操作指南（清晰版）
+
+## 1️⃣ 准备环境
+
+```bash
+# 查看 Node.js 和 npm 版本
+node -v
+npm -v
+```
+
+确保 Node.js &gt;=18、npm 可用。
+
+---
+
+## 2️⃣ 安装 VS Code 插件开发工具
+
+```bash
+npm i -g yo generator-code
+```
+
+&gt; 如果报权限错误，请加 `sudo`：`sudo npm i -g yo generator-code`
+
+---
+
+## 3️⃣ 创建插件工程
+
+```bash
+yo code
+```
+
+* 选择 **New Extension (TypeScript)**
+* Extension name：`xml-uuid-hover`
+* 其他选项一路回车（默认即可）
+
+进入工程目录：
+
+```bash
+cd xml-uuid-hover
+```
+
+安装依赖：
+
+```bash
+npm i
+```
+
+---
+
+## 4️⃣ 安装 CSV 解析库
+
+```bash
+npm i csv-parse
+```
+
+---
+
+## 5️⃣ 创建 CSV 文件
+
+在工程根目录新建 `translations.csv`，示例内容：
+
+```csv
+UUID,English,Chinese
+00000001,open,打开
+00000002,close,关闭
+00000003,start,开始
+```
+
+---
+
+## 6️⃣ 修改 `package.json`
+
+### 1. activationEvents
+
+```json
+&#34;activationEvents&#34;: [
+  &#34;onLanguage:xml&#34;,
+  &#34;onCommand:xml-uuid-hover.reloadTranslations&#34;
+],
+```
+
+### 2. contributes
+
+```jsonc
+&#34;contributes&#34;: {
+  &#34;configuration&#34;: {
+    &#34;title&#34;: &#34;XML UUID Hover&#34;,
+    &#34;properties&#34;: {
+      &#34;xmlUuidHover.csvPath&#34;: {
+        &#34;type&#34;: &#34;string&#34;,
+        &#34;default&#34;: &#34;translations.csv&#34;,
+        &#34;description&#34;: &#34;CSV 文件路径（绝对路径或相对工作区根目录）&#34;
+      }
+    }
+  },
+  &#34;commands&#34;: [
+    {
+      &#34;command&#34;: &#34;xml-uuid-hover.reloadTranslations&#34;,
+      &#34;title&#34;: &#34;XML UUID Hover: 重新加载翻译 CSV&#34;
+    }
+  ]
+}
+```
+
+---
+
+## 7️⃣ 替换 `src/extension.ts`
+
+```ts
+import * as vscode from &#34;vscode&#34;;
+import * as fs from &#34;fs&#34;;
+import * as path from &#34;path&#34;;
+import { parse } from &#34;csv-parse/sync&#34;;
+
+let translationMap = new Map&lt;string, string&gt;();
+
+function resolveCsvPath(userPath: string): string {
+    if (!userPath?.trim()) return &#34;&#34;;
+    if (path.isAbsolute(userPath)) return userPath;
+    const root = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || &#34;&#34;;
+    return path.join(root, userPath);
+}
+
+function loadTranslation(filePathSetting: string) {
+    try {
+        const finalPath = resolveCsvPath(filePathSetting);
+
+        if (!finalPath) {
+            vscode.window.showWarningMessage(&#34;未配置 CSV 路径（xmlUuidHover.csvPath）。&#34;);
+            translationMap.clear();
+            return;
+        }
+        if (!fs.existsSync(finalPath)) {
+            vscode.window.showWarningMessage(`CSV 文件不存在：${finalPath}`);
+            translationMap.clear();
+            return;
+        }
+
+        const content = fs.readFileSync(finalPath, &#34;utf-8&#34;);
+        const records: any[] = parse(content, { columns: true, skip_empty_lines: true });
+
+        translationMap.clear();
+        for (const row of records) {
+            const key = String(row.UUID || &#34;&#34;).trim();
+            const zh = String(row.Chinese || &#34;&#34;).trim();
+            const en = String(row.English || &#34;&#34;).trim();
+            if (key) translationMap.set(key, zh || en || &#34;&#34;);
+        }
+
+        console.log(`[xml-uuid-hover] Translation loaded: ${translationMap.size}`);
+        vscode.window.setStatusBarMessage(`XML UUID Hover: 已加载 ${translationMap.size} 条翻译`, 2000);
+    } catch (e) {
+        console.error(&#34;[xml-uuid-hover] Failed to load CSV:&#34;, e);
+        vscode.window.showErrorMessage(`加载 CSV 失败：${String((e as Error).message || e)}`);
+        translationMap.clear();
+    }
+}
+
+export function activate(context: vscode.ExtensionContext) {
+    const getCsvSetting = () =&gt;
+        vscode.workspace.getConfiguration(&#34;xmlUuidHover&#34;).get&lt;string&gt;(&#34;csvPath&#34;) || &#34;translations.csv&#34;;
+
+    // 初次加载
+    let csvPathSetting = getCsvSetting();
+    loadTranslation(csvPathSetting);
+
+    // Hover Provider
+    const hoverProvider = vscode.languages.registerHoverProvider(&#34;xml&#34;, {
+        provideHover(document, position) {
+            const range = document.getWordRangeAtPosition(position, /[0-9A-Fa-f]{8,}/);
+            if (!range) return;
+            const word = document.getText(range);
+            if (translationMap.has(word)) {
+                return new vscode.Hover(`翻译: ${translationMap.get(word)}`);
+            }
+        },
+    });
+    context.subscriptions.push(hoverProvider);
+
+    // 手动刷新命令
+    const reloadCmd = vscode.commands.registerCommand(&#34;xml-uuid-hover.reloadTranslations&#34;, () =&gt; {
+        csvPathSetting = getCsvSetting();
+        loadTranslation(csvPathSetting);
+        vscode.window.showInformationMessage(&#34;翻译 CSV 已重新加载！&#34;);
+    });
+    context.subscriptions.push(reloadCmd);
+
+    // 设置变更时自动重载
+    const cfgWatcher = vscode.workspace.onDidChangeConfiguration((e) =&gt; {
+        if (e.affectsConfiguration(&#34;xmlUuidHover.csvPath&#34;)) {
+            csvPathSetting = getCsvSetting();
+            loadTranslation(csvPathSetting);
+            vscode.window.showInformationMessage(&#34;翻译 CSV 路径已更新并重新加载。&#34;);
+        }
+    });
+    context.subscriptions.push(cfgWatcher);
+}
+
+export function deactivate() {}
+```
+
+---
+
+## 8️⃣ 运行插件
+
+1. 打开 VS Code → 打开插件工程
+2. 按 F5 启动 **Extension Development Host**
+3. 在新窗口里打开 `.xml` 文件，写入：
+
+```xml
+&lt;button text=&#34;00000001&#34;/&gt;
+```
+
+4. 鼠标悬停在 `00000001` 上，会显示翻译：`翻译: 打开`
+
+---
+
+## 9️⃣ 打包插件
+
+```bash
+# 本地安装 vsce（推荐）
+npm install --save-dev vsce
+
+# 打包
+npx vsce package
+```
+
+生成 `.vsix` 文件，可以在 VS Code 扩展面板 → … → Install from VSIX 安装。
+</textarea>
+        </div>
+      </div>
+
+      <!-- 预览区 -->
+      <div class="post-preview" id="post-preview" style="display: none;">
+        <div class="preview-header">
+          <h3>预览</h3>
+          <button type="button" class="btn-refresh-preview" id="refresh-preview">🔄 刷新</button>
+        </div>
+        <div class="preview-content" id="preview-content">
+          <!-- 预览内容将通过JS渲染 -->
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 图片上传模态框 -->
+  <div class="modal" id="image-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入图片</h4>
+        <button type="button" class="btn-close" onclick="closeImageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="upload-tabs">
+          <button type="button" class="tab-btn active" data-tab="upload">上传图片</button>
+          <button type="button" class="tab-btn" data-tab="url">图片链接</button>
+        </div>
+        
+        <div class="tab-content" id="upload-tab">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-placeholder">
+              <div class="upload-icon">📁</div>
+              <p>拖拽图片到这里或点击选择</p>
+              <small>支持 JPG, PNG, GIF, WebP 格式，最大 5MB</small>
+            </div>
+          </div>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+        
+        <div class="tab-content" id="url-tab" style="display: none;">
+          <div class="form-group">
+            <label for="image-url">图片链接</label>
+            <input type="url" id="image-url" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label for="image-alt">替代文本</label>
+            <input type="text" id="image-alt" placeholder="图片描述（可选）">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="insertImageUrl()">插入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接插入模态框 -->
+  <div class="modal" id="link-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入链接</h4>
+        <button type="button" class="btn-close" onclick="closeLinkModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="link-text">链接文本</label>
+          <input type="text" id="link-text" placeholder="显示的文本">
+        </div>
+        <div class="form-group">
+          <label for="link-url">链接地址</label>
+          <input type="url" id="link-url" placeholder="https://example.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeLinkModal()">取消</button>
+        <button type="button" class="btn btn-primary" onclick="insertLink()">插入</button>
+      </div>
+    </div>
+  </div>
 
   <hr>
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
 
+  <script src="/js/post.js"></script>
 </body>
-<script src="/js/post.js"></script>
 </html>

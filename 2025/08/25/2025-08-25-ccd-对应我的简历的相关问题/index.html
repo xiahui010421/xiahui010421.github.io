@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <title>ccd-对应我的简历的相关问题 - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/css/post.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
-
-
 <body class="post-page">
-
   <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/down.css" />
 
@@ -64,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -258,13 +253,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+  
+  <!-- 编辑模式切换按钮 -->
+  <div class="post-controls">
+    <button id="toggle-edit" class="btn-edit-toggle" title="切换编辑模式">
+      <span class="edit-icon">✏️</span>
+      <span class="edit-text">编辑</span>
+    </button>
+    <button id="save-post" class="btn-save-post" style="display: none;" title="保存文章">
+      <span class="save-icon">💾</span>
+      <span class="save-text">保存</span>
+    </button>
+  </div>
 
   <main class="container">
     <aside class="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%80%E8%83%BD%E7%82%B9%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88%EF%BC%88%E5%9F%BA%E4%BA%8E-CCD-system%E9%A1%B9%E7%9B%AE%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">技能点优化方案（基于 CCD-system项目）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTML-CSS-JS-%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">1. HTML&#x2F;CSS&#x2F;JS 前端基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Vue-%E5%8F%8A%E7%94%9F%E6%80%81%EF%BC%88Vuex-Router-Element-UI-Vite%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">2. Vue 及生态（Vuex &#x2F; Router &#x2F; Element UI &#x2F; Vite）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BB%84%E4%BB%B6%E5%BA%93%E4%B8%8E-CSS-%E5%AE%9A%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">3. 组件库与 CSS 定制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Git-%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E4%B8%8E%E5%8D%8F%E4%BD%9C"><span class="toc-number">1.4.</span> <span class="toc-text">4. Git 仓库管理与协作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%90%8E%E7%AB%AF-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.5.</span> <span class="toc-text">5. 后端 &#x2F; 数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96"><span class="toc-number">1.6.</span> <span class="toc-text">6. 数据结构与算法优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5"><span class="toc-number">1.7.</span> <span class="toc-text">7. 计算机网络与接口对接</span></a></li></ol></li></ol>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%80%E8%83%BD%E7%82%B9%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88%EF%BC%88%E5%9F%BA%E4%BA%8E-CCD-system%E9%A1%B9%E7%9B%AE%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">技能点优化方案（基于 CCD-system项目）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTML-CSS-JS-%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">1. HTML&#x2F;CSS&#x2F;JS 前端基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Vue-%E5%8F%8A%E7%94%9F%E6%80%81%EF%BC%88Vuex-Router-Element-UI-Vite%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">2. Vue 及生态（Vuex &#x2F; Router &#x2F; Element UI &#x2F; Vite）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BB%84%E4%BB%B6%E5%BA%93%E4%B8%8E-CSS-%E5%AE%9A%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">3. 组件库与 CSS 定制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Git-%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E4%B8%8E%E5%8D%8F%E4%BD%9C"><span class="toc-number">1.4.</span> <span class="toc-text">4. Git 仓库管理与协作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%90%8E%E7%AB%AF-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.5.</span> <span class="toc-text">5. 后端 &#x2F; 数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96"><span class="toc-number">1.6.</span> <span class="toc-text">6. 数据结构与算法优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5"><span class="toc-number">1.7.</span> <span class="toc-text">7. 计算机网络与接口对接</span></a></li></ol></li></ol>
+      </div>
     </aside>
+    
     <section class="content">
-      <h1 id="技能点优化方案（基于-CCD-system项目）"><a href="#技能点优化方案（基于-CCD-system项目）" class="headerlink" title="技能点优化方案（基于 CCD-system项目）"></a>技能点优化方案（基于 CCD-system项目）</h1><h2 id="1-HTML-CSS-JS-前端基础"><a href="#1-HTML-CSS-JS-前端基础" class="headerlink" title="1. HTML&#x2F;CSS&#x2F;JS 前端基础"></a>1. HTML&#x2F;CSS&#x2F;JS 前端基础</h2><ul>
+      <!-- 文章元信息编辑区 -->
+      <div class="post-meta-edit" id="post-meta-edit" style="display: none;">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" value="ccd-对应我的简历的相关问题" placeholder="文章标题">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-date">发布日期</label>
+            <input type="datetime-local" id="edit-date" value="2025-08-25T00:26">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-categories">分类</label>
+            <input type="text" id="edit-categories" value="项目经验, 技能总结" placeholder="分类1, 分类2...">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-tags">标签</label>
+            <input type="text" id="edit-tags" value="前后端联调, 项目经验, CCD系统, Vue, ElementUI, 技能优化, 简历项目" placeholder="标签1, 标签2...">
+          </div>
+          
+          <div class="meta-item meta-item-full">
+            <label for="edit-thumbnail">缩略图</label>
+            <input type="text" id="edit-thumbnail" value="" placeholder="图片URL（可选）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑工具栏 -->
+      <div class="edit-toolbar" id="edit-toolbar" style="display: none;">
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="行内代码">
+            &lt;/&gt;
+          </button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="heading1" title="标题1">H1</button>
+          <button type="button" class="toolbar-btn" data-action="heading2" title="标题2">H2</button>
+          <button type="button" class="toolbar-btn" data-action="heading3" title="标题3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="link" title="插入链接">🔗</button>
+          <button type="button" class="toolbar-btn" data-action="image" title="插入图片">🖼️</button>
+          <input type="file" id="image-upload" accept="image/*" style="display: none;" multiple>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="quote" title="引用">❝</button>
+          <button type="button" class="toolbar-btn" data-action="list" title="列表">•</button>
+          <button type="button" class="toolbar-btn" data-action="codeblock" title="代码块">{ }</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn toggle-preview" data-action="preview" title="预览">👁️</button>
+        </div>
+      </div>
+
+      <!-- 文章内容显示区 -->
+      <article class="post-content" id="post-content">
+        <h1 id="技能点优化方案（基于-CCD-system项目）"><a href="#技能点优化方案（基于-CCD-system项目）" class="headerlink" title="技能点优化方案（基于 CCD-system项目）"></a>技能点优化方案（基于 CCD-system项目）</h1><h2 id="1-HTML-CSS-JS-前端基础"><a href="#1-HTML-CSS-JS-前端基础" class="headerlink" title="1. HTML&#x2F;CSS&#x2F;JS 前端基础"></a>1. HTML&#x2F;CSS&#x2F;JS 前端基础</h2><ul>
 <li><strong>精准还原设计稿</strong></li>
 <li><strong>JS 数据处理与兼容</strong><ul>
 <li>解析后端返回的 JSON 字符串数据（如 <code>&quot;[&#123;\&quot;id\&quot;:1&#125;]&quot;</code> → <code>JSON.parse()</code>）；</li>
@@ -345,14 +424,173 @@ document.addEventListener('DOMContentLoaded', () => {
 </li>
 </ul>
 
+      </article>
+
+      <!-- 编辑器 -->
+      <div class="post-editor" id="post-editor" style="display: none;">
+        <div class="editor-container">
+          <textarea id="markdown-editor" class="markdown-textarea" placeholder="开始编辑你的文章...">---
+title: ccd-对应我的简历的相关问题
+date: 2025-08-25T08:26:00.000Z
+tags: [项目经验, CCD系统, Vue, ElementUI, 前后端联调, 技能优化, 简历项目]
+categories: [项目经验, 技能总结]
+---
+
+# 技能点优化方案（基于 CCD-system项目）
+
+## 1. HTML/CSS/JS 前端基础
+
+- **精准还原设计稿**
+- **JS 数据处理与兼容**
+  - 解析后端返回的 JSON 字符串数据（如 `&#34;[{\&#34;id\&#34;:1}]&#34;` → `JSON.parse()`）；
+  - 兼容不同工厂服务器（武汉 WUH、烟台 YAN），保证 API 渲染一致。
+
+------
+
+## 2. Vue 及生态（Vuex / Router / Element UI / Vite）
+
+- **Vue 核心**
+  - BUG1：用 `reactive/obs` 定义工厂列表 `plantList`，数据响应式渲染。
+  - BUG2：`computed` 生成默认日期范围（当前日期 -7 天 ~ 当前日期）。
+- **生态链落地**
+  - Vue Router：配置 `/user-admin`、`/action-operation` 两个核心页面。
+  - Element UI：表格、下拉框、按钮全量覆盖业务。
+  - Vite：热更新加速调试，BUG 修复效率提升 30%。
+
+------
+
+## 3. 组件库与 CSS 定制
+
+- **Element UI 深度定制**
+  - BUG3：`el-select` hover 样式统一 ，增加 placeholder 提示。
+  - 表格定制：质检结果列（NG 红色、Low-Risk 黄色）提升可读性。
+- **CSS 方案**
+  - Less：定义统一变量，复用到表格/按钮。
+  - Tailwind：快速布局（flex、justify-between），适配车间大屏/笔记本分辨率。
+
+------
+
+## 4. Git 仓库管理与协作
+
+- **分支管理**
+  - 如 `feature/bug1-plant-select`、`feature/bug2-action-date`，避免直接动 `main`。
+- **提交规范**
+  - `fix: 修复工厂下拉框硬编码`、`feat: Action 页新增日期范围筛选`。
+- **多人协作**
+  - `git pull/merge` 同步 API 变更，解决冲突（如日期逻辑修改）。
+
+------
+
+## 5. 后端 / 数据库 
+
+- **后端与数据库**
+  - MySQL 验证前端写入：`sys_user` 表核对工厂字段，`buss_plant` 表确认工厂列表。
+  - postman 测试 API，发现 `Content-Type` 配置缺失问题。
+
+------
+
+## 6. 数据结构与算法优化
+
+- **数据结构应用**
+  - 数组：遍历工厂列表渲染下拉框，`find` 定位用户默认工厂。
+  - 哈希表：日期范围映射 `{ &#39;7天&#39;: 7, &#39;30天&#39;: 30 }`。
+- **算法优化**
+
+------
+
+## 7. 计算机网络与接口对接
+
+- **HTTP 协议实践**
+  - POST 请求统一 `Content-Type: application/json`，解决 400 错误。
+  - Axios 响应拦截：200 正常 / 401 跳转登录 / 500 错误提示。
+- **TCP/IP 与可靠传输**
+  - 设置 Axios 超时 `5000ms`，避免工厂服务器网络抖动。
+  - 校验返回数据必填字段（id/item/describe），缺失时提示格式错误。
+</textarea>
+        </div>
+      </div>
+
+      <!-- 预览区 -->
+      <div class="post-preview" id="post-preview" style="display: none;">
+        <div class="preview-header">
+          <h3>预览</h3>
+          <button type="button" class="btn-refresh-preview" id="refresh-preview">🔄 刷新</button>
+        </div>
+        <div class="preview-content" id="preview-content">
+          <!-- 预览内容将通过JS渲染 -->
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 图片上传模态框 -->
+  <div class="modal" id="image-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入图片</h4>
+        <button type="button" class="btn-close" onclick="closeImageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="upload-tabs">
+          <button type="button" class="tab-btn active" data-tab="upload">上传图片</button>
+          <button type="button" class="tab-btn" data-tab="url">图片链接</button>
+        </div>
+        
+        <div class="tab-content" id="upload-tab">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-placeholder">
+              <div class="upload-icon">📁</div>
+              <p>拖拽图片到这里或点击选择</p>
+              <small>支持 JPG, PNG, GIF, WebP 格式，最大 5MB</small>
+            </div>
+          </div>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+        
+        <div class="tab-content" id="url-tab" style="display: none;">
+          <div class="form-group">
+            <label for="image-url">图片链接</label>
+            <input type="url" id="image-url" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label for="image-alt">替代文本</label>
+            <input type="text" id="image-alt" placeholder="图片描述（可选）">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="insertImageUrl()">插入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接插入模态框 -->
+  <div class="modal" id="link-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入链接</h4>
+        <button type="button" class="btn-close" onclick="closeLinkModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="link-text">链接文本</label>
+          <input type="text" id="link-text" placeholder="显示的文本">
+        </div>
+        <div class="form-group">
+          <label for="link-url">链接地址</label>
+          <input type="url" id="link-url" placeholder="https://example.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeLinkModal()">取消</button>
+        <button type="button" class="btn btn-primary" onclick="insertLink()">插入</button>
+      </div>
+    </div>
+  </div>
 
   <hr>
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
 
+  <script src="/js/post.js"></script>
 </body>
-<script src="/js/post.js"></script>
 </html>

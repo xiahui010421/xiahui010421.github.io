@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <title>滴滴 - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/css/post.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
-
-
 <body class="post-page">
-
   <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/down.css" />
 
@@ -64,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -258,24 +253,272 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+  
+  <!-- 编辑模式切换按钮 -->
+  <div class="post-controls">
+    <button id="toggle-edit" class="btn-edit-toggle" title="切换编辑模式">
+      <span class="edit-icon">✏️</span>
+      <span class="edit-text">编辑</span>
+    </button>
+    <button id="save-post" class="btn-save-post" style="display: none;" title="保存文章">
+      <span class="save-icon">💾</span>
+      <span class="save-text">保存</span>
+    </button>
+  </div>
 
   <main class="container">
     <aside class="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E5%9C%B0%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%9E%E5%88%B0%E5%88%9D%E5%A7%8B%E4%BD%8D%E7%BD%AE%E7%9A%84%E6%9C%80%E5%B0%91%E4%BF%AE%E6%94%B9%E6%AC%A1%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">扫地机器人回到初始位置的最少修改次数</span></a></li></ol>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E5%9C%B0%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%9E%E5%88%B0%E5%88%9D%E5%A7%8B%E4%BD%8D%E7%BD%AE%E7%9A%84%E6%9C%80%E5%B0%91%E4%BF%AE%E6%94%B9%E6%AC%A1%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">扫地机器人回到初始位置的最少修改次数</span></a></li></ol>
+      </div>
     </aside>
+    
     <section class="content">
-      <h2 id="扫地机器人回到初始位置的最少修改次数"><a href="#扫地机器人回到初始位置的最少修改次数" class="headerlink" title="扫地机器人回到初始位置的最少修改次数"></a>扫地机器人回到初始位置的最少修改次数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 1. 接收指令输入（可替换为实际需求的输入方式，如页面输入框获取）</span><br><span class="line">const input = prompt(&quot;请输入扫地机器人的指令（仅包含U、D、L、R）：&quot;) || &quot;&quot;;</span><br><span class="line"></span><br><span class="line">// 2. 统计各方向指令的数量</span><br><span class="line">let up = 0, down = 0, left = 0, right = 0;</span><br><span class="line">for (const char of input) &#123;</span><br><span class="line">  switch (char) &#123;</span><br><span class="line">    case &quot;U&quot;: up++; break;</span><br><span class="line">    case &quot;D&quot;: down++; break;</span><br><span class="line">    case &quot;L&quot;: left++; break;</span><br><span class="line">    case &quot;R&quot;: right++; break;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 3. 计算各方向需修改的次数</span><br><span class="line">// 垂直方向（U/D）：需让 up = down，修改次数 = 位移差的一半</span><br><span class="line">const verticalModify = Math.floor(Math.abs(up - down) / 2);</span><br><span class="line">// 水平方向（L/R）：需让 left = right，修改次数 = 位移差的一半</span><br><span class="line">const horizontalModify = Math.floor(Math.abs(left - right) / 2);</span><br><span class="line"></span><br><span class="line">// 4. 总最少修改次数</span><br><span class="line">const minModifyCount = verticalModify + horizontalModify;</span><br><span class="line"></span><br><span class="line">// 5. 输出结果</span><br><span class="line">console.log(`最少需要修改的字符个数：$&#123;minModifyCount&#125;`);</span><br><span class="line">alert(`最少需要修改的字符个数：$&#123;minModifyCount&#125;`);</span><br></pre></td></tr></table></figure>
+      <!-- 文章元信息编辑区 -->
+      <div class="post-meta-edit" id="post-meta-edit" style="display: none;">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" value="滴滴" placeholder="文章标题">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-date">发布日期</label>
+            <input type="datetime-local" id="edit-date" value="2025-09-06T22:58">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-categories">分类</label>
+            <input type="text" id="edit-categories" value="笔试经验, 算法题解" placeholder="分类1, 分类2...">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-tags">标签</label>
+            <input type="text" id="edit-tags" value="JavaScript, 笔试, 秋招, 前端面试, 算法, 贪心算法, 滴滴, 代码题" placeholder="标签1, 标签2...">
+          </div>
+          
+          <div class="meta-item meta-item-full">
+            <label for="edit-thumbnail">缩略图</label>
+            <input type="text" id="edit-thumbnail" value="" placeholder="图片URL（可选）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑工具栏 -->
+      <div class="edit-toolbar" id="edit-toolbar" style="display: none;">
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="行内代码">
+            &lt;/&gt;
+          </button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="heading1" title="标题1">H1</button>
+          <button type="button" class="toolbar-btn" data-action="heading2" title="标题2">H2</button>
+          <button type="button" class="toolbar-btn" data-action="heading3" title="标题3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="link" title="插入链接">🔗</button>
+          <button type="button" class="toolbar-btn" data-action="image" title="插入图片">🖼️</button>
+          <input type="file" id="image-upload" accept="image/*" style="display: none;" multiple>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="quote" title="引用">❝</button>
+          <button type="button" class="toolbar-btn" data-action="list" title="列表">•</button>
+          <button type="button" class="toolbar-btn" data-action="codeblock" title="代码块">{ }</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn toggle-preview" data-action="preview" title="预览">👁️</button>
+        </div>
+      </div>
+
+      <!-- 文章内容显示区 -->
+      <article class="post-content" id="post-content">
+        <h2 id="扫地机器人回到初始位置的最少修改次数"><a href="#扫地机器人回到初始位置的最少修改次数" class="headerlink" title="扫地机器人回到初始位置的最少修改次数"></a>扫地机器人回到初始位置的最少修改次数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 1. 接收指令输入（可替换为实际需求的输入方式，如页面输入框获取）</span><br><span class="line">const input = prompt(&quot;请输入扫地机器人的指令（仅包含U、D、L、R）：&quot;) || &quot;&quot;;</span><br><span class="line"></span><br><span class="line">// 2. 统计各方向指令的数量</span><br><span class="line">let up = 0, down = 0, left = 0, right = 0;</span><br><span class="line">for (const char of input) &#123;</span><br><span class="line">  switch (char) &#123;</span><br><span class="line">    case &quot;U&quot;: up++; break;</span><br><span class="line">    case &quot;D&quot;: down++; break;</span><br><span class="line">    case &quot;L&quot;: left++; break;</span><br><span class="line">    case &quot;R&quot;: right++; break;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 3. 计算各方向需修改的次数</span><br><span class="line">// 垂直方向（U/D）：需让 up = down，修改次数 = 位移差的一半</span><br><span class="line">const verticalModify = Math.floor(Math.abs(up - down) / 2);</span><br><span class="line">// 水平方向（L/R）：需让 left = right，修改次数 = 位移差的一半</span><br><span class="line">const horizontalModify = Math.floor(Math.abs(left - right) / 2);</span><br><span class="line"></span><br><span class="line">// 4. 总最少修改次数</span><br><span class="line">const minModifyCount = verticalModify + horizontalModify;</span><br><span class="line"></span><br><span class="line">// 5. 输出结果</span><br><span class="line">console.log(`最少需要修改的字符个数：$&#123;minModifyCount&#125;`);</span><br><span class="line">alert(`最少需要修改的字符个数：$&#123;minModifyCount&#125;`);</span><br></pre></td></tr></table></figure>
 <p>##v使得尽可能多的市民能买到房子，从而让无家可归的市民数量最少。核心思路是贪心算法：让能负担低价房的市民优先购买低价房，这样能最大化利用补贴和市民的购房能力，留下高价房给有能力负担的市民，同时合理使用补贴。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">const readline = require(&#x27;readline&#x27;);</span><br><span class="line">const rl = readline.createInterface(&#123;</span><br><span class="line">    input: process.stdin,</span><br><span class="line">    output: process.stdout</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">rl.question(&#x27;&#x27;, (line1) =&gt; &#123;</span><br><span class="line">    // 1. 处理第一行输入：n(市民数)、m(房产数)、V(补贴总额)</span><br><span class="line">    const [n, m, V] = line1.trim().split(&#x27; &#x27;).map(Number);</span><br><span class="line">    rl.question(&#x27;&#x27;, (line2) =&gt; &#123;</span><br><span class="line">        // 2. 市民能负担的最大房价（升序：让能力弱的先选）</span><br><span class="line">        const a = line2.trim().split(&#x27; &#x27;).map(Number).sort((x, y) =&gt; x - y);</span><br><span class="line">        rl.question(&#x27;&#x27;, (line3) =&gt; &#123;</span><br><span class="line">            // 3. 房产价格（升序：让低价房先被选，最大化匹配数）</span><br><span class="line">            const b = line3.trim().split(&#x27; &#x27;).map(Number).sort((x, y) =&gt; x - y);</span><br><span class="line">            </span><br><span class="line">            let i = 0; // 市民指针（从能力最弱开始）</span><br><span class="line">            let j = 0; // 房产指针（从价格最低开始）</span><br><span class="line">            let remainingSubsidy = V; // 剩余补贴（可拆分使用）</span><br><span class="line"></span><br><span class="line">            while (i &lt; n &amp;&amp; j &lt; m) &#123;</span><br><span class="line">                const needSubsidy = b[j] - a[i]; // 买房需要的补贴金额</span><br><span class="line">                if (a[i] &gt;= b[j]) &#123;</span><br><span class="line">                    // 情况1：市民直接买，不用补贴</span><br><span class="line">                    i++;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125; else if (needSubsidy &gt; 0 &amp;&amp; needSubsidy &lt;= remainingSubsidy) &#123;</span><br><span class="line">                    // 情况2：需要补贴，且剩余补贴够，用补贴买</span><br><span class="line">                    remainingSubsidy -= needSubsidy; // 减去用掉的补贴</span><br><span class="line">                    i++;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    // 情况3：没补贴/补贴不够，市民无家可归</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 无家可归人数 = 总市民数 - 成功购房数（j是成功匹配的房产数）</span><br><span class="line">            console.log(n - j);</span><br><span class="line">            rl.close();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
+      </article>
+
+      <!-- 编辑器 -->
+      <div class="post-editor" id="post-editor" style="display: none;">
+        <div class="editor-container">
+          <textarea id="markdown-editor" class="markdown-textarea" placeholder="开始编辑你的文章...">---
+title: 滴滴
+date: 2025-09-07T06:58:00.000Z
+tags: [笔试, 秋招, 算法, 贪心算法, 滴滴, 前端面试, 代码题, JavaScript]
+categories: [笔试经验, 算法题解]
+---
+
+## 扫地机器人回到初始位置的最少修改次数
+```
+// 1. 接收指令输入（可替换为实际需求的输入方式，如页面输入框获取）
+const input = prompt(&#34;请输入扫地机器人的指令（仅包含U、D、L、R）：&#34;) || &#34;&#34;;
+
+// 2. 统计各方向指令的数量
+let up = 0, down = 0, left = 0, right = 0;
+for (const char of input) {
+  switch (char) {
+    case &#34;U&#34;: up++; break;
+    case &#34;D&#34;: down++; break;
+    case &#34;L&#34;: left++; break;
+    case &#34;R&#34;: right++; break;
+  }
+}
+
+// 3. 计算各方向需修改的次数
+// 垂直方向（U/D）：需让 up = down，修改次数 = 位移差的一半
+const verticalModify = Math.floor(Math.abs(up - down) / 2);
+// 水平方向（L/R）：需让 left = right，修改次数 = 位移差的一半
+const horizontalModify = Math.floor(Math.abs(left - right) / 2);
+
+// 4. 总最少修改次数
+const minModifyCount = verticalModify + horizontalModify;
+
+// 5. 输出结果
+console.log(`最少需要修改的字符个数：${minModifyCount}`);
+alert(`最少需要修改的字符个数：${minModifyCount}`);
+```
+##v使得尽可能多的市民能买到房子，从而让无家可归的市民数量最少。核心思路是贪心算法：让能负担低价房的市民优先购买低价房，这样能最大化利用补贴和市民的购房能力，留下高价房给有能力负担的市民，同时合理使用补贴。
+```
+const readline = require(&#39;readline&#39;);
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question(&#39;&#39;, (line1) =&gt; {
+    // 1. 处理第一行输入：n(市民数)、m(房产数)、V(补贴总额)
+    const [n, m, V] = line1.trim().split(&#39; &#39;).map(Number);
+    rl.question(&#39;&#39;, (line2) =&gt; {
+        // 2. 市民能负担的最大房价（升序：让能力弱的先选）
+        const a = line2.trim().split(&#39; &#39;).map(Number).sort((x, y) =&gt; x - y);
+        rl.question(&#39;&#39;, (line3) =&gt; {
+            // 3. 房产价格（升序：让低价房先被选，最大化匹配数）
+            const b = line3.trim().split(&#39; &#39;).map(Number).sort((x, y) =&gt; x - y);
+            
+            let i = 0; // 市民指针（从能力最弱开始）
+            let j = 0; // 房产指针（从价格最低开始）
+            let remainingSubsidy = V; // 剩余补贴（可拆分使用）
+
+            while (i &lt; n &amp;&amp; j &lt; m) {
+                const needSubsidy = b[j] - a[i]; // 买房需要的补贴金额
+                if (a[i] &gt;= b[j]) {
+                    // 情况1：市民直接买，不用补贴
+                    i++;
+                    j++;
+                } else if (needSubsidy &gt; 0 &amp;&amp; needSubsidy &lt;= remainingSubsidy) {
+                    // 情况2：需要补贴，且剩余补贴够，用补贴买
+                    remainingSubsidy -= needSubsidy; // 减去用掉的补贴
+                    i++;
+                    j++;
+                } else {
+                    // 情况3：没补贴/补贴不够，市民无家可归
+                    i++;
+                }
+            }
+
+            // 无家可归人数 = 总市民数 - 成功购房数（j是成功匹配的房产数）
+            console.log(n - j);
+            rl.close();
+        });
+    });
+});
+```
+</textarea>
+        </div>
+      </div>
+
+      <!-- 预览区 -->
+      <div class="post-preview" id="post-preview" style="display: none;">
+        <div class="preview-header">
+          <h3>预览</h3>
+          <button type="button" class="btn-refresh-preview" id="refresh-preview">🔄 刷新</button>
+        </div>
+        <div class="preview-content" id="preview-content">
+          <!-- 预览内容将通过JS渲染 -->
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 图片上传模态框 -->
+  <div class="modal" id="image-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入图片</h4>
+        <button type="button" class="btn-close" onclick="closeImageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="upload-tabs">
+          <button type="button" class="tab-btn active" data-tab="upload">上传图片</button>
+          <button type="button" class="tab-btn" data-tab="url">图片链接</button>
+        </div>
+        
+        <div class="tab-content" id="upload-tab">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-placeholder">
+              <div class="upload-icon">📁</div>
+              <p>拖拽图片到这里或点击选择</p>
+              <small>支持 JPG, PNG, GIF, WebP 格式，最大 5MB</small>
+            </div>
+          </div>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+        
+        <div class="tab-content" id="url-tab" style="display: none;">
+          <div class="form-group">
+            <label for="image-url">图片链接</label>
+            <input type="url" id="image-url" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label for="image-alt">替代文本</label>
+            <input type="text" id="image-alt" placeholder="图片描述（可选）">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="insertImageUrl()">插入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接插入模态框 -->
+  <div class="modal" id="link-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入链接</h4>
+        <button type="button" class="btn-close" onclick="closeLinkModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="link-text">链接文本</label>
+          <input type="text" id="link-text" placeholder="显示的文本">
+        </div>
+        <div class="form-group">
+          <label for="link-url">链接地址</label>
+          <input type="url" id="link-url" placeholder="https://example.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeLinkModal()">取消</button>
+        <button type="button" class="btn btn-primary" onclick="insertLink()">插入</button>
+      </div>
+    </div>
+  </div>
 
   <hr>
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
 
+  <script src="/js/post.js"></script>
 </body>
-<script src="/js/post.js"></script>
 </html>

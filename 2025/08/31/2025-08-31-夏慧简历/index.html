@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <title>夏慧简历2 - xiahuibb&#39;s blog</title>
   <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/css/post.css">
-  
+  <link rel="stylesheet" href="/css/post.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
-
-
 <body class="post-page">
-
   <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/down.css" />
 
@@ -64,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -258,13 +253,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+  
+  <!-- 编辑模式切换按钮 -->
+  <div class="post-controls">
+    <button id="toggle-edit" class="btn-edit-toggle" title="切换编辑模式">
+      <span class="edit-icon">✏️</span>
+      <span class="edit-text">编辑</span>
+    </button>
+    <button id="save-post" class="btn-save-post" style="display: none;" title="保存文章">
+      <span class="save-icon">💾</span>
+      <span class="save-text">保存</span>
+    </button>
+  </div>
 
   <main class="container">
     <aside class="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">夏慧_Web前端_应届生</span></a></li></ol>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">夏慧_Web前端_应届生</span></a></li></ol>
+      </div>
     </aside>
+    
     <section class="content">
-      
+      <!-- 文章元信息编辑区 -->
+      <div class="post-meta-edit" id="post-meta-edit" style="display: none;">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" value="夏慧简历2" placeholder="文章标题">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-date">发布日期</label>
+            <input type="datetime-local" id="edit-date" value="2025-08-31T06:30">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-categories">分类</label>
+            <input type="text" id="edit-categories" value="个人简历, 职业发展" placeholder="分类1, 分类2...">
+          </div>
+          
+          <div class="meta-item">
+            <label for="edit-tags">标签</label>
+            <input type="text" id="edit-tags" value="前端开发, 简历, 应届生, 求职, Web开发" placeholder="标签1, 标签2...">
+          </div>
+          
+          <div class="meta-item meta-item-full">
+            <label for="edit-thumbnail">缩略图</label>
+            <input type="text" id="edit-thumbnail" value="" placeholder="图片URL（可选）">
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑工具栏 -->
+      <div class="edit-toolbar" id="edit-toolbar" style="display: none;">
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button type="button" class="toolbar-btn" data-action="code" title="行内代码">
+            &lt;/&gt;
+          </button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="heading1" title="标题1">H1</button>
+          <button type="button" class="toolbar-btn" data-action="heading2" title="标题2">H2</button>
+          <button type="button" class="toolbar-btn" data-action="heading3" title="标题3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="link" title="插入链接">🔗</button>
+          <button type="button" class="toolbar-btn" data-action="image" title="插入图片">🖼️</button>
+          <input type="file" id="image-upload" accept="image/*" style="display: none;" multiple>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn" data-action="quote" title="引用">❝</button>
+          <button type="button" class="toolbar-btn" data-action="list" title="列表">•</button>
+          <button type="button" class="toolbar-btn" data-action="codeblock" title="代码块">{ }</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button type="button" class="toolbar-btn toggle-preview" data-action="preview" title="预览">👁️</button>
+        </div>
+      </div>
+
+      <!-- 文章内容显示区 -->
+      <article class="post-content" id="post-content">
+        
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -524,14 +603,362 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+      </article>
+
+      <!-- 编辑器 -->
+      <div class="post-editor" id="post-editor" style="display: none;">
+        <div class="editor-container">
+          <textarea id="markdown-editor" class="markdown-textarea" placeholder="开始编辑你的文章...">---
+title: 夏慧简历2
+date: 2025-08-31T14:30:00.000Z
+tags: [简历, 前端开发, 求职, Web开发, 应届生]
+categories: [个人简历, 职业发展]
+---
+
+{% raw %}
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;zh-CN&#34;&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;UTF-8&#34; /&gt;
+  &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34; /&gt;
+  &lt;title&gt;夏慧_Web前端_应届生_简历&lt;/title&gt;
+    &lt;style&gt;
+    @page {
+      size: A4;
+      margin: 10mm; /* A4 打印边距缩小 */
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 10pt; /* 缩小字体让内容更紧凑 */
+        line-height: 1.4; /* 行距更紧凑 */
+      }
+      .page {
+        margin: 0;
+      }
+      .section-title {
+        page-break-after: avoid;
+      }
+      .proj-item, .exp-item, .edu-item {
+        page-break-inside: avoid; /* 避免拆开 */
+      }
+    }
+
+    :root {
+      --text: #333;
+      --primary1: #dc3545;
+      --primary2: #e85d75;
+      --accent: #007bff;
+      --shadow: rgba(220, 53, 69, 0.3);
+      --font-body: &#39;Microsoft YaHei&#39;, Arial, sans-serif;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      font-size: 12pt;
+    }
+    .page {
+      margin: 20px; /* 页面边距稍微缩小 */
+    }
+    .title {
+      text-align: center;
+      margin: 0 0 20px 0;
+      color: var(--text);
+      font-size: 24px; /* 缩小标题 */
+      font-weight: bold;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      min-height: 120px;
+      gap: 12px;
+    }
+    .profile {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .profile .info {
+      line-height: 1.6;
+      font-size: 10.5pt; /* 紧凑点 */
+    }
+    .info-row { margin-bottom: 4px; }
+    .info-row strong { font-weight: bold; }
+    .accent { color: var(--accent); text-decoration: none; }
+    .avatar-wrap { display: flex; justify-content: center; align-items: center; }
+    .avatar {
+      width: 100px; height: 120px; object-fit: cover; border-radius: 6px;
+    }
+    .section-title {
+      background: linear-gradient(135deg, var(--primary1), var(--primary2));
+      color: #fff;
+      padding: 8px 16px;
+      margin: 18px 0 10px 0;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+    .edu-item, .proj-item, .exp-item { margin-bottom: 10px; font-size: 10.5pt; }
+    .list { padding-left: 18px; margin: 6px 0; font-size: 10.5pt; }
+    .list li { margin: 4px 0; }
+    .split-line { height: 1px; background: #eee; margin: 8px 0; }
+    .list {
+      list-style-type: disc; /* 原点列表 */
+      padding-left: 20px;    /* 留出缩进，圆点不会贴着文字 */
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&#34;page&#34;&gt;
+    &lt;h1 class=&#34;title&#34;&gt;夏慧_Web前端_应届生&lt;/h1&gt;
+
+    &lt;div class=&#34;topbar&#34;&gt;
+      &lt;div class=&#34;profile&#34;&gt;
+        &lt;div class=&#34;info&#34;&gt;
+          &lt;div class=&#34;info-row&#34;&gt;&lt;strong&gt;手机号码：&lt;/strong&gt; 18573184921&lt;/div&gt;
+          &lt;div class=&#34;info-row&#34;&gt;&lt;strong&gt;邮箱：&lt;/strong&gt; &lt;a class=&#34;accent&#34; href=&#34;mailto:xiahuibb@163.com&#34;&gt;xiahuibb@163.com&lt;/a&gt;&lt;/div&gt;
+          &lt;div class=&#34;info-row&#34;&gt;&lt;strong&gt;博客：&lt;/strong&gt; &lt;a class=&#34;accent&#34; href=&#34;https://xiahui010421.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noreferrer noopener&#34;&gt;https://xiahui010421.github.io/&lt;/a&gt;&lt;/div&gt;
+          &lt;div class=&#34;info-row&#34;&gt;&lt;strong&gt;基本信息：&lt;/strong&gt; 24岁 女&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&#34;avatar-wrap&#34;&gt;
+        &lt;img class=&#34;avatar&#34; src=&#34;/images/xiahui.jpg&#34; alt=&#34;个人照片&#34; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&#34;section-title&#34;&gt;&lt;span&gt;教育经历&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&#34;edu-item&#34;&gt;
+      &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+        &lt;div&gt;&lt;strong&gt;武汉工程大学&lt;/strong&gt;&lt;/div&gt;
+        &lt;div&gt;2023年09月 - 2026年06月&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;计算机技术 硕士 | 计算机学院 | 武汉&lt;/div&gt;
+      &lt;div&gt;GPA: 3.59（年级前5%）&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&#34;edu-item&#34;&gt;
+      &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+        &lt;div&gt;&lt;strong&gt;湖南农业大学&lt;/strong&gt;&lt;/div&gt;
+        &lt;div&gt;2018年09月 - 2022年06月&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;信息与计算科学 本科 | 计算机学院 | 长沙&lt;/div&gt;
+      &lt;div&gt;GPA: 3.28（年级前20%）&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&#34;edu-item&#34;&gt;
+      &lt;strong&gt;相关课程：&lt;/strong&gt; 高等代数、概率统计、C语言程序设计、面向对象开发（Java）、计算机网络、数据库、数据结构、计算机组成原理。
+    &lt;/div&gt;
+
+    &lt;div class=&#34;section-title&#34;&gt;&lt;span&gt;专业技能&lt;/span&gt;&lt;/div&gt;
+    &lt;ul class=&#34;list&#34;&gt;
+      &lt;li&gt;熟练使用 &lt;strong&gt;HTML/CSS/JS&lt;/strong&gt; 以及各种前端库，能精确还原设计稿，兼容不同平台和浏览器&lt;/li&gt;
+      &lt;li&gt;熟练使用 &lt;strong&gt;Vue&lt;/strong&gt;，熟悉其相关生态（&lt;strong&gt;Vuex&lt;/strong&gt;、&lt;strong&gt;Element UI&lt;/strong&gt;、&lt;strong&gt;Vite&lt;/strong&gt;、&lt;strong&gt;Vue Router&lt;/strong&gt; 等），能独立完成各种需求&lt;/li&gt;
+      &lt;li&gt;熟练使用 &lt;strong&gt;Element UI&lt;/strong&gt;、&lt;strong&gt;Antd&lt;/strong&gt; 等组件库，且熟练使用 &lt;strong&gt;Less/Sass&lt;/strong&gt; 预编译器和 &lt;strong&gt;CSS-in-JS&lt;/strong&gt;、&lt;strong&gt;Tailwind CSS&lt;/strong&gt; 等 CSS 库，能深度定制化业务组件&lt;/li&gt;
+      &lt;li&gt;熟练使用 &lt;strong&gt;Git&lt;/strong&gt; 仓库管理，熟练多人协作 coding&lt;/li&gt;
+      &lt;li&gt;熟悉 &lt;strong&gt;Java&lt;/strong&gt;、&lt;strong&gt;Python&lt;/strong&gt; 等编程语言，熟悉常用数据库，如 &lt;strong&gt;MySQL&lt;/strong&gt;、&lt;strong&gt;Oracle&lt;/strong&gt;；熟悉 &lt;strong&gt;Flutter&lt;/strong&gt; 框架、&lt;strong&gt;Dart&lt;/strong&gt; 语言&lt;/li&gt;
+      &lt;li&gt;掌握常用的数据结构（链表、栈、队列等），熟练使用快速、归并排序、动态规划等算法&lt;/li&gt;
+      &lt;li&gt;熟悉计算机网络原理，熟悉 &lt;strong&gt;TCP/IP&lt;/strong&gt; 网络模型、&lt;strong&gt;HTTP&lt;/strong&gt;、&lt;strong&gt;TCP&lt;/strong&gt;、&lt;strong&gt;UDP&lt;/strong&gt; 等&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&#34;section-title&#34;&gt;&lt;span&gt;项目经历&lt;/span&gt;&lt;/div&gt;
+
+    &lt;div class=&#34;proj-item&#34;&gt;
+      &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+      &lt;div&gt;
+        &lt;strong&gt;海外广告盈利站点:
+          &lt;a href=&#34;https://xiahui010421.github.io/happymac&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;
+            happymac.club
+          &lt;/a&gt;
+        &lt;/strong&gt;
+      &lt;/div&gt;
+      &lt;div&gt;2024年06月 - 2025年05月&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&#34;split-line&#34;&gt;&lt;/div&gt;
+      &lt;div class=&#34;meta&#34;&gt;&lt;strong&gt;项目简介：&lt;/strong&gt; 汇总各种 Windows 小游戏在 Mac 上的游玩教程（无畏契约、金铲铲之战等）、Mac 实用小工具（电池管理、剪切板、风扇散热控制等）—热门小游戏（水果忍者等）吸引国内外用户流量，接入海外广告盈利&lt;/div&gt;
+      &lt;ul class=&#34;list&#34;&gt;
+        &lt;li&gt;
+          iframe 定制化嵌入(
+            &lt;a class=&#34;accent&#34; href=&#34;https://xiahui010421.github.io/happymac/smallgames/sgrz.html&#34; target=&#34;_blank&#34; rel=&#34;noreferrer noopener&#34;&gt;
+              水果忍者体感版
+            &lt;/a&gt;
+          )核心部分嵌入网站
+        &lt;/li&gt;
+        &lt;li&gt;移动端适配，包括导航栏适配、多列布局适配、卡片布局适配等；多个独立 HTML 组成网站且保持一致&lt;/li&gt;
+        &lt;li&gt;接入海外广告 + 谷歌埋点（分析 PV、UV）&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;div class=&#34;meta&#34;&gt;网站上线已半个月，目前日均新增用户约 50 人，独立访客（UV）超过 100，页面浏览量（PV）超过 500。数据来自 Google Analytics。&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&#34;proj-item&#34;&gt;
+      &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+        &lt;div&gt;&lt;strong&gt;智能家居 APP（机器人大赛参赛项目）&lt;/strong&gt;&lt;/div&gt;
+        &lt;div&gt;2023年11月 - 2024年05月&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&#34;split-line&#34;&gt;&lt;/div&gt;
+      &lt;div class=&#34;meta&#34;&gt;&lt;strong&gt;简介：&lt;/strong&gt; 为解决家庭设备控制分散、操作复杂的问题，团队开发了一款智能家居控制 APP，支持灯光、空调、安防等设备的远程控制和语音识别功能。项目获得国家级机器人大赛二等奖。&lt;/div&gt;
+      &lt;ol class=&#34;list&#34;&gt;
+        &lt;li&gt;Vue + Element UI 还原设计稿，实现美观界面和良好体验的交互&lt;/li&gt;
+        &lt;li&gt;Axios 二次封装：请求拦截、响应拦截报错统一处理&lt;/li&gt;
+        &lt;li&gt;Pinia 做全局状态管理，实现多个组件间的状态共享和统一管理&lt;/li&gt;
+        &lt;li&gt;对接后端接口 + 调试，并且集成模拟数据 Mock 进行开发&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&#34;section-title&#34;&gt;&lt;span&gt;实习经历&lt;/span&gt;&lt;/div&gt;
+
+    &lt;div class=&#34;exp-item&#34;&gt;
+    &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+      &lt;div&gt;&lt;strong&gt;武汉彼欧英瑞杰汽车系统有限公司&lt;/strong&gt;&lt;/div&gt;
+      &lt;div&gt;2025年06月 - 2025年08月&lt;/div&gt;
+    &lt;/div&gt;
+      前端工程师 | 数据分析部分 | 武汉
+      &lt;div class=&#34;split-line&#34;&gt;&lt;/div&gt;
+      &lt;div class=&#34;meta&#34;&gt;&lt;strong&gt;业务介绍：&lt;/strong&gt; 聚焦汽车零部件产品全生命周期管理，核心项目 CCD Qualify 系统 负责对接工厂生产环节 —— 通过产品拍照检验、数据自动录入数据库，实现质检流程数字化管理，支撑全国多工厂（如武汉 WUH、烟台 YAN）的质检数据同步与用户权限管控。&lt;/div&gt;
+      &lt;div class=&#34;meta&#34;&gt;&lt;strong&gt;技术栈：&lt;/strong&gt; Vue.js、Axios、Vue Router、Element UI、JavaScript（ES6+）、前后端联调、MySQL（数据交互）&lt;/div&gt;
+      &lt;ul class=&#34;list&#34;&gt;
+        &lt;li&gt;&lt;strong&gt;核心职能：&lt;/strong&gt; 主导前端 Bug 定位与修复，优化前端页面渲染逻辑&lt;/li&gt;
+        &lt;li&gt;负责前端与后端的 API 对接（含接口调试、参数传递、数据格式处理），协同后端实现数据库数据的精准读取与提交&lt;/li&gt;
+        &lt;li&gt;聚焦核心功能页（如用户管理、Action Operation 操作页）的交互优化，解决数据加载性能、动态配置化等关键问题，确保页面从 “不可用” 到 “稳定运行”&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;div class=&#34;meta&#34;&gt;&lt;strong&gt;关键成果：&lt;/strong&gt; 核心 Bug 修复与功能落地&lt;/div&gt;
+      &lt;div class=&#34;meta&#34;&gt;&lt;strong&gt;技术收获与价值：&lt;/strong&gt; 熟练掌握 Vue 技术栈在企业级项目中的应用，
+        包括响应式数据管理、API 封装与联调、组件动态渲染，独立解决前端与后端、数据库的交互问题；
+        让关键业务页面恢复使用，直接支撑工厂质检流程，提升系统可用性；
+        理解前端性能优化的核心思路（如减少数据加载量、避免前端二次过滤），为后续项目的性能优化积累实践经验。&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&#34;section-title&#34;&gt;&lt;span&gt;荣誉奖项&lt;/span&gt;&lt;/div&gt;
+
+    &lt;ul style=&#34;list-style-type: disc; padding-left: 20px;&#34;&gt;
+      &lt;li&gt;
+        &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+          &lt;span&gt;智能机器人大赛国二&lt;/span&gt;
+          &lt;span&gt;2024.06&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+          &lt;span&gt;蓝桥杯算法竞赛（Python）省一&lt;/span&gt;
+          &lt;span&gt;2025.04&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+          &lt;span&gt;连续三年获得研究生学业一等奖奖学金&lt;/span&gt;
+          &lt;span&gt;2024.10&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+          &lt;span&gt;发表 SCI 论文一篇，软著一篇&lt;/span&gt;
+          &lt;span&gt;2025.03&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;div style=&#34;display: flex; justify-content: space-between;&#34;&gt;
+          &lt;span&gt;CET-6，数据库三级，网络工程师&lt;/span&gt;
+          &lt;span&gt;2021.04&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+{% endraw %}
+</textarea>
+        </div>
+      </div>
+
+      <!-- 预览区 -->
+      <div class="post-preview" id="post-preview" style="display: none;">
+        <div class="preview-header">
+          <h3>预览</h3>
+          <button type="button" class="btn-refresh-preview" id="refresh-preview">🔄 刷新</button>
+        </div>
+        <div class="preview-content" id="preview-content">
+          <!-- 预览内容将通过JS渲染 -->
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 图片上传模态框 -->
+  <div class="modal" id="image-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入图片</h4>
+        <button type="button" class="btn-close" onclick="closeImageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="upload-tabs">
+          <button type="button" class="tab-btn active" data-tab="upload">上传图片</button>
+          <button type="button" class="tab-btn" data-tab="url">图片链接</button>
+        </div>
+        
+        <div class="tab-content" id="upload-tab">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-placeholder">
+              <div class="upload-icon">📁</div>
+              <p>拖拽图片到这里或点击选择</p>
+              <small>支持 JPG, PNG, GIF, WebP 格式，最大 5MB</small>
+            </div>
+          </div>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+        
+        <div class="tab-content" id="url-tab" style="display: none;">
+          <div class="form-group">
+            <label for="image-url">图片链接</label>
+            <input type="url" id="image-url" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label for="image-alt">替代文本</label>
+            <input type="text" id="image-alt" placeholder="图片描述（可选）">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="insertImageUrl()">插入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接插入模态框 -->
+  <div class="modal" id="link-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>插入链接</h4>
+        <button type="button" class="btn-close" onclick="closeLinkModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="link-text">链接文本</label>
+          <input type="text" id="link-text" placeholder="显示的文本">
+        </div>
+        <div class="form-group">
+          <label for="link-url">链接地址</label>
+          <input type="url" id="link-url" placeholder="https://example.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeLinkModal()">取消</button>
+        <button type="button" class="btn btn-primary" onclick="insertLink()">插入</button>
+      </div>
+    </div>
+  </div>
 
   <hr>
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
 
+  <script src="/js/post.js"></script>
 </body>
-<script src="/js/post.js"></script>
 </html>

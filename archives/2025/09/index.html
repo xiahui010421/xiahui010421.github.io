@@ -59,7 +59,7 @@
 
 <!-- Blog 日期 JSON 数据 -->
 <script id="blogDates" type="application/json">
-  ["2025-07-01","2025-06-25","2025-07-02","2025-06-26","2025-08-25","2025-08-18","2025-08-31","2025-08-26","2025-09-06","2025-08-18","2025-09-06","2025-09-07","2025-09-07","2025-09-03","2025-07-03","2025-09-07","2025-09-06","2025-09-07","2025-06-25"]
+  ["2025-06-25","2025-06-26","2025-07-01","2025-07-02","2025-07-03","2025-08-18","2025-08-18","2025-08-25","2025-08-26","2025-08-31","2025-09-03","2025-09-06","2025-09-07","2025-09-06","2025-09-06","2025-09-07","2025-09-07","2025-06-25"]
 </script>
   <script>
     const blogDates = JSON.parse(document.getElementById('blogDates').textContent);
@@ -274,17 +274,20 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
       </aside>
-
       <section class="archive-content">
         <div class="current-filter" id="current-filter"></div>
         <div id="archive-list" class="archive-list">
           
+            
             <article class="card post-card"
-              data-category="test"
-              data-tag="test">
+              data-category=""
+              data-tag="">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="test" class="random-image" />
+                  <!-- 有图片，设置原始路径 -->
+                  <img src="/images/1757265797702_f32d_cc.png" alt="test" 
+                       data-has-thumbnail="true" 
+                       data-original-src="/images/1757265797702_f32d_cc.png" />
                 
               </div>
               <div class="post-info">
@@ -294,63 +297,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="post-meta">
                   <time datetime="2025-09-07T16:00:00.000Z">2025-09-08</time>
                   
-                    <span class="post-categories">
-                      
-                        <a href="/categories/test/">test</a>
-                      
-                    </span>
-                  
-                  
-                    <span class="post-tags">
-                      
-                        <a href="/tags/test/">test</a>
-                      
-                    </span>
                   
                 </div>
                 
               </div>
             </article>
           
-            <article class="card post-card"
-              data-category="test"
-              data-tag="test">
-              <div class="post-thumbnail">
-                
-                  <img src="" alt="test2" class="random-image" />
-                
-              </div>
-              <div class="post-info">
-                <h2 class="post-title">
-                  <a href="/2025/09/08/2025-09-08-test2/">test2</a>
-                </h2>
-                <div class="post-meta">
-                  <time datetime="2025-09-07T16:00:00.000Z">2025-09-08</time>
-                  
-                    <span class="post-categories">
-                      
-                        <a href="/categories/test/">test</a>
-                      
-                    </span>
-                  
-                  
-                    <span class="post-tags">
-                      
-                        <a href="/tags/test/">test</a>
-                      
-                    </span>
-                  
-                </div>
-                
-              </div>
-            </article>
-          
+            
             <article class="card post-card"
               data-category="面试经验,前端开发"
               data-tag="JavaScript,Vue,面试,前端,浏览器缓存,打包工具,实习">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="面试问题-实习" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="面试问题-实习" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -392,12 +354,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="技术教程,服务器部署"
               data-tag="博客搭建,部署,Linux,SSH,SCP,后端开发">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="Linux搭建blog" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="Linux搭建blog" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -437,12 +403,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="笔试经验,面试准备"
               data-tag="JavaScript,笔试,秋招,前端面试,算法,数据结构,武汉,哈乐沃">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="武汉哈乐沃笔试" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="武汉哈乐沃笔试" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -486,12 +456,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="笔试经验,算法题解"
               data-tag="JavaScript,笔试,秋招,前端面试,算法,贪心算法,滴滴,代码题">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="滴滴" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="滴滴" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -535,12 +509,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="undefined"
               data-tag="undefined">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="博客编辑器图片上传功能设置说明" class="random-image" />
+                  <!-- 有图片，设置原始路径 -->
+                  <img src="&lt;span class=&#34;link&#34;&gt;/images/2024/03/博客标题/文件名.jpg&lt;/span&gt;" alt="博客编辑器图片上传功能设置说明" 
+                       data-has-thumbnail="true" 
+                       data-original-src="&lt;span class=&#34;link&#34;&gt;/images/2024/03/博客标题/文件名.jpg&lt;/span&gt;" />
                 
               </div>
               <div class="post-info">
@@ -568,12 +546,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="个人简历,职业发展"
-              data-tag="前端开发,简历,求职,Web开发,应届生,简历模板,打印优化">
+              data-tag="前端开发,简历,应届生,求职,Web开发,简历模板,打印优化">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="夏慧简历3" class="random-image" />
+                  <!-- 有图片，设置原始路径 -->
+                  <img src="https://raw.githubusercontent.com/xiahui010421/XIAHUIBLOG-ORI/main/xiahui.jpg" alt="夏慧简历3" 
+                       data-has-thumbnail="true" 
+                       data-original-src="https://raw.githubusercontent.com/xiahui010421/XIAHUIBLOG-ORI/main/xiahui.jpg" />
                 
               </div>
               <div class="post-info">
@@ -598,11 +580,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       
                         <a href="/tags/%E7%AE%80%E5%8E%86/">简历</a>, 
                       
+                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
+                      
                         <a href="/tags/%E6%B1%82%E8%81%8C/">求职</a>, 
                       
                         <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>, 
-                      
-                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
                       
                         <a href="/tags/%E7%AE%80%E5%8E%86%E6%A8%A1%E6%9D%BF/">简历模板</a>, 
                       
@@ -615,12 +597,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="个人简历,职业发展"
-              data-tag="前端开发,简历,求职,Web开发,应届生">
+              data-tag="前端开发,简历,应届生,求职,Web开发">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="夏慧简历2" class="random-image" />
+                  <!-- 有图片，设置原始路径 -->
+                  <img src="/images/xiahui.jpg" alt="夏慧简历2" 
+                       data-has-thumbnail="true" 
+                       data-original-src="/images/xiahui.jpg" />
                 
               </div>
               <div class="post-info">
@@ -645,11 +631,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       
                         <a href="/tags/%E7%AE%80%E5%8E%86/">简历</a>, 
                       
+                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
+                      
                         <a href="/tags/%E6%B1%82%E8%81%8C/">求职</a>, 
                       
-                        <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>, 
-                      
-                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>
+                        <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>
                       
                     </span>
                   
@@ -658,12 +644,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="个人简历,职业发展"
-              data-tag="前端开发,项目经验,简历,求职,Web开发,应届生,技能总结">
+              data-tag="前端开发,项目经验,简历,应届生,求职,Web开发,技能总结">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="个人简历" class="random-image" />
+                  <!-- 有图片，设置原始路径 -->
+                  <img src="/images/xiahui.jpg" alt="个人简历" 
+                       data-has-thumbnail="true" 
+                       data-original-src="/images/xiahui.jpg" />
                 
               </div>
               <div class="post-info">
@@ -690,11 +680,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       
                         <a href="/tags/%E7%AE%80%E5%8E%86/">简历</a>, 
                       
+                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
+                      
                         <a href="/tags/%E6%B1%82%E8%81%8C/">求职</a>, 
                       
                         <a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发</a>, 
-                      
-                        <a href="/tags/%E5%BA%94%E5%B1%8A%E7%94%9F/">应届生</a>, 
                       
                         <a href="/tags/%E6%8A%80%E8%83%BD%E6%80%BB%E7%BB%93/">技能总结</a>
                       
@@ -705,12 +695,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="项目经验,技能总结"
               data-tag="前后端联调,项目经验,CCD系统,Vue,ElementUI,技能优化,简历项目">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="ccd-对应我的简历的相关问题" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="ccd-对应我的简历的相关问题" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -752,12 +746,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="开发工具,技术教程"
               data-tag="VS Code插件,TypeScript,XML,UUID,插件开发,CSV解析,开发工具">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="Extension-xml-uuid" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="Extension-xml-uuid" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -799,12 +797,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="技术教程,部署发布"
               data-tag="Hexo,GitHub Pages,自动部署,CI/CD,Git,Shell脚本,静态网站">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="Hexo 网站自动部署到 GitHub Pages" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="Hexo 网站自动部署到 GitHub Pages" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -846,12 +848,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="旅游攻略,国内游"
               data-tag="北京,旅游攻略,国内游,故宫,长城,颐和园,行程安排,费用清单">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="北京旅游" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="北京旅游" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -895,12 +901,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="前端开发,技术实践"
               data-tag="前端开发,前后端联调,Axios,API,Mock数据,接口文档">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="后端连接" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="后端连接" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -940,12 +950,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="旅游攻略,境外游"
               data-tag="旅游,新加坡,游记,攻略,机票">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="新加坡" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="新加坡" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -983,12 +997,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="前端开发,技术实现"
               data-tag="前端开发,JavaScript,日期处理,日历">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="日历添加日期" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="日历添加日期" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -1024,12 +1042,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="技术教程,博客搭建"
               data-tag="Hexo,博客搭建,GitHub Pages,Node.js,教程,部署,前端开发">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="Hexo 博客搭建总结" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="Hexo 博客搭建总结" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -1071,12 +1093,16 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </article>
           
+            
             <article class="card post-card"
               data-category="博客搭建,入门指南"
               data-tag="Hexo,博客搭建,入门教程,欢迎文章">
               <div class="post-thumbnail">
                 
-                  <img src="" alt="Hello World" class="random-image" />
+                  <!-- 没有图片，使用随机图片 -->
+                  <img src="" alt="Hello World" 
+                       class="random-image" 
+                       data-has-thumbnail="false" />
                 
               </div>
               <div class="post-info">
@@ -1120,7 +1146,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <footer>
   <p>© 2025 xiahui010421 | Powered by XiaHui</p>
 </footer>
-
 
   <script src="/js/archive.js"></script>
 </body>
